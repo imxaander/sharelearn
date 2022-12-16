@@ -10,17 +10,22 @@
     <title>ShareLearn - Paranaque National Highschool - Main</title>
 </head>
 <body>
+    <!-- Dim Panel -->
     <div id="dim-pane" onclick="closeFromDim()"></div>
+
+    <!-- Top Bar-->
     <div id="top-bar">
         <p id="top-text-header" onclick="colOrex()">PARAÑAQUE NATIONAL HIGH SCHOOL - MAIN - Home of the Gentle Warriors</p>
     </div>
-    
+
+    <!-- Top Navigation Bar -->
     <div id="top-nav-bar">
         <i class="fas fa-bars" aria-hidden="true" id="open-side-bar-button" onclick="openSideBar()"></i>
         <img src="img/pnhs_logo_255px.jpg" id="pnhslogo40px">
         ShareLearn
     </div>
 
+    <!-- Side Navigation Bar -->
     <div id="side-nav-bar">
         <i id="close-side-bar-button" onclick="closeSideBar()" class="fa fa-close"></i>
         <br><br>
@@ -34,22 +39,31 @@
         <p>For Researchers Only!</p>
     </div>
 
-    <div >
-        <div id="Home" class="tabs">
-            <form action="">
+    <!-- Tabs -->
+    <div>
 
-            </form>
+        <!-- Home Tab -->
+        <div id="Home" class="tabs">
+
+            <div>
+                
+            </div>
+
         </div>
 
+        <!-- About Tab -->
         <div id="About" class="tabs" style="display:none">
             <h2 align="center">What is Sharelearn?</h2>
             <p>Paris is the capital of France.</p> 
         </div>
 
+        <!-- Terms and Conditions Tab -->
         <div id="Terms-and-Conditions" class="tabs" style="display:none">
             <h2>Tokyo</h2>
             <p>Tokyo is the capital of Japan.</p>
         </div>
+
     </div>
+
 </body>
 </html>

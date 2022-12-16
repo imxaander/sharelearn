@@ -28,7 +28,6 @@ function closeSideBar(){
 }
 
 function openDim(){
-    
     document.getElementById("dim-pane").style.display = "block"
 }
 
