@@ -45,15 +45,60 @@
         <!-- Home Tab -->
         <div id="Home" class="tabs">
 
-            <div>
-                
-            </div>
+            <!-- User Type Selection -->
+            <form action="">
+                <div id="User-Selection">
+                    <div class="forms-banner">
+                        <h2 class="forms-title">Welcome!</h2>
+                        <p class="forms-description">Before using ShareLearn, please tell us If you’re a :</p> 
+                    </div>
+                    <div class="forms-body">
+                        <label>
+                            <input type="radio" name="user-type" value="teacher">
+                            <i class='fas fa-chalkboard-teacher'></i>
+                            <p class="forms-choice-description">Teacher</p>
+                        </label> 
+                        <label>
+                            <input type="radio" name="user-type" value="user" >
+                            <i class='fas fa-user-graduate'></i>
+                            <p class="forms-choice-description">Student</p>
+                        </label>
+                    </div>
+                    <br>
+                    <div class="forms-footer">
+                        <button class="forms-next-button">Next</button>
+                    </div>
+                </div>
 
+                <!-- Action Selection -->
+                <div id="">
+                    <div class="forms-banner">
+                        <h2 class="forms-title">Next!</h2>
+                        <p class="forms-description">Do you want to:</p> 
+                    </div>
+                    <div class="forms-body">
+                        <label>
+                            <input type="radio" name="action-type" value="teacher">
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            <p class="forms-choice-description">Send File</p>
+                        </label> 
+                        <label>
+                            <input type="radio" name="user-type" value="user" >
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                            <p class="forms-choice-description">Recieve File</p>
+                        </label>
+                    </div>
+                    <br>
+                    <div class="forms-footer">
+                        <button class="forms-next-button">Next</button>
+                    </div>
+                </div>
+            </form>
         </div>
 
         <!-- About Tab -->
         <div id="About" class="tabs" style="display:none">
-            <h2 align="center">What is Sharelearn?</h2>
+            <h2 align="center">What is <font color="#0B8043">Sharelearn</font>?</h2>
             <p>Paris is the capital of France.</p> 
         </div>
 
