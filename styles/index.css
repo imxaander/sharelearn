@@ -37,7 +37,7 @@ body, html{
 #pnhslogo40px{
     height: 40px;
     width: 40px;
-    margin: 8px 4px -12px -4px;
+    margin: 8px 4px 17px -4px;
 }
 #side-nav-bar{
     width: 0%;
@@ -69,7 +69,6 @@ body, html{
     position: fixed;
     display: none;
     transition: all 0.5s;
-    -webkit-transition: all 0.25s ease-in;
 }
 
 #side-nav-bar p{
@@ -91,6 +90,7 @@ body, html{
     padding: 10px;
     font-weight: bold;
     color: white;
+    transition: all 0.3s;
 }
 .tabs{
     transition: all 0.5s;
@@ -101,7 +101,7 @@ body, html{
 .forms-title{
     text-align: center;
     color:#0B8043;
-    font-size: 50px;
+    font-size: 40px;
     margin: 10px;
 }
 .forms-description{
@@ -112,6 +112,7 @@ body, html{
 .forms-body{
     text-align: center;
     font-size: 100px;
+    margin: 20px;
 }
 .forms-body i{
     padding: 10px;
@@ -133,12 +134,34 @@ body, html{
     padding: 10px;
     border-radius: 25px;
 }
+.note{
+    text-align: center;
+}
+#code-input-body{
+    font-size: 16px;
+    border: solid #0B8043 2px;
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    
+}
+#code-input{
+    border: none;
+}
+
 [type=radio] { 
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
-  }
+}
+[type=file] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 [type=radio] + i {
     cursor: pointer;
 }
@@ -152,4 +175,7 @@ body, html{
 label{
     color: #0B8043;
 
+}
+#main-form-carousel{
+    
 }
