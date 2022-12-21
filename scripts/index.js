@@ -52,12 +52,17 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " tab-selected";
 }
+function uploadLoading() {
+    document.getElementById("upload-file").style.display = "none";
+    document.getElementById("upload-loading").style.display = "block"
+}
+
 
 //jquery
 
-$('.carousel').carousel({
-    interval: false,
-});
-$('.forms-next-button').on("click", ()=>{
-    $('.carousel').carousel('next')
+$('#upload-file').on("submit",()=>{
+    console.log("uploading...");
+    $('#upload-file').style.display = "none";
+    $('#upload-loading').style.display = "block";
+    
 })

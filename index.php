@@ -52,7 +52,7 @@
                             # i love you thea mwa mwa
             ?>
                 <!-- Upload File form-->
-                <form action="upload.php" enctype="multipart/form-data">
+                <form action="php/upload.php" enctype="multipart/form-data" method="post">
                     <input type="text" name="user-type" value="<?php echo $_POST["user-type"]; ?>" hidden>
                     <input type="text" name="mac-address" value="<?php echo exec('getmac'); ?>" hidden>
                     
@@ -63,16 +63,30 @@
                         </div>
                         <div class="forms-body">
                             <label>
-                                <input type="file" name="action-type" value="teacher">
+                                <input type="file" name="file" required>
                                 <i class="fa fa-upload" aria-hidden="true"></i>
                             </label>
                         </div>
                         <div class="forms-footer">
                             <p class="note">Note:  Before uploading files, make sure that you've read our Terms and Conditions. </p>
-                            <button type="submit" class="forms-next-button">Upload</button>
+                            <button type="submit" class="forms-next-button" name="submit">Upload</button>
                         </div>
                     </div>
                 </form>
+                <!-- Upload Loading -->
+                <div id="upload-loading">
+                    <div class="forms-banner">
+                        <h2 class="forms-title">Uploading!</h2>
+                        <p class="forms-description">Wait for it to upload.</p> 
+                    </div>
+                    <div class="forms-body">
+                        <i class="fa fa-spinner fa-spin" style="color: #0B8043" aria-hidden="true"></i>
+                    </div>
+                    <div class="forms-footer">
+                        <p class="note">Note: Upload speed may vary. </p>
+                    </div>
+
+                </div>
             <?php
                         }elseif ($_POST["action-type"] == "download") {
                             # download
@@ -142,21 +156,6 @@
             <?php
                 }
             ?>
-                <!-- Upload Loading -->
-                <div id="upload-loading">
-                    <div class="forms-banner">
-                        <h2 class="forms-title">Uploading!</h2>
-                        <p class="forms-description">Wait for it to upload.</p> 
-                    </div>
-                    <div class="forms-body">
-                        <i class="fa fa-spinner fa-spin" style="color: #0B8043" aria-hidden="true"></i>
-                    </div>
-                    <div class="forms-footer">
-                        <p class="note">Note: Upload speed may vary. </p>
-                        <button type="button" class="forms-next-button">Next</button>
-                    </div>
-                </div>
-
                 <!-- Upload File form-->
                 <div id="upload-file">
                     <div class="forms-banner">
