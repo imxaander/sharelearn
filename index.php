@@ -1,3 +1,12 @@
+<?php
+    if(!isset($_COOKIE["device_id"])){
+        $uniqueIdGeneration = uniqid("SLUSER");
+        if (!setcookie("device_id",$uniqueIdGeneration)) {
+            echo "There's an error with the cookie setting. Please contact XANDER ISON for this issue";
+        }
+
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
