@@ -63,7 +63,13 @@
                 <!-- Upload File form-->
                 <form action="php/upload.php" enctype="multipart/form-data" method="post">
                     <input type="text" name="user-type" value="<?php echo $_POST["user-type"]; ?>" hidden>
-                    <input type="text" name="mac-address" value="<?php echo exec('getmac'); ?>" hidden>
+                    <input type="text" name="device-id" value="<?php 
+                        if (isset($_COOKIE["device_id"])) {
+                            echo $_COOKIE["device_id"];
+                        }else{
+                            echo "NO COOKIES FOUND";
+                        }
+                    ?>" hidden>
                     
                     <div id="upload-file">
                         <div class="forms-banner">
