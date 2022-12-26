@@ -39,8 +39,11 @@
                     $result = mysqli_query($con, $sql);
 
                     if ($result) {
-                        //if successfull add
-                        echo "Done add";
+                        $dateVal = date("Y-m-d H:i:s");
+                        //if successfull add account, proceed to adding loccation of file.
+                        $sql = "INSERT INTO files VALUES('', '$file_code', '$guest_id', '$file_code . "_" .  basename($_FILES["file"]["name"])', 'date_add($dateVal, date_interval_create_from_date_string("5 days"));' )";
+                        echo $sql;
+                        
                     }
                 }else{
                     echo "There's already an account";
