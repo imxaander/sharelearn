@@ -14,12 +14,12 @@
     }else{
         $uploaded = "redirectHome";
     }
+
     if(!isset($_COOKIE["device_id"])){
         $uniqueIdGeneration = uniqid("SLUSER");
         if (!setcookie("device_id",$uniqueIdGeneration)) {
             echo "There's an error with the cookie setting. Please contact XANDER ISON for this issue";
         }
-
     }
 ?>
 <html lang="en">
@@ -54,6 +54,7 @@
         <i id="close-side-bar-button" onclick="closeSideBar()" class="fa fa-close"></i>
         <br><br>
         <a href="#" onclick="closeSideBar(); openTab(event, 'Home')" class="tablinks tab-selected">Home</a>
+        <a href="#" onclick="closeSideBar(); openTab(event, 'MyUploads')" class="tablinks">My Uploads</a>
         <a href="#" onclick="closeSideBar(); openTab(event, 'About')" class="tablinks">About Sharelearn</a>
         <a href="#" onclick="closeSideBar(); openTab(event, 'Terms-and-Conditions')" class="tablinks">Terms and Conditions</a>
         <br><br><br><br><br><br>
@@ -64,7 +65,7 @@
     </div>
 
     <!-- Tabs -->
-    <div>
+    <div id="tabs">
 
         <!-- Home Tab -->
         <div id="Home" class="tabs">
@@ -231,6 +232,44 @@
                 }
             ?>
                 
+        </div>
+        
+        <!-- My Uploads -->
+        <div id="MyUploads" class="tabs" style="display:none">
+            <h2 align="center">My<font color="#0B8043">Uploads</font></h2>
+            <div id="uploads-list">
+            <?php
+            //search for this device id, then if exists on the database, display all the files you have uploaded
+            //containing the file name, code, expiration
+                $current_device_id = $_COOKIE["device_id"];
+                $sql = "SELECT * FROM guest WHERE device_id = '$current_device_id'";
+                $result = mysqli_query($con, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+
+                    $row = mysqli_fetch_assoc($result);
+                    $guest_id = $row["guest_id"]; 
+                    $sql = "SELECT * FROM files WHERE guest_id = '$guest_id'";
+                    $result = mysqli_query($con, $sql);
+
+                    if ($result) {
+
+                        while ($row = mysqli_fetch_array($result) ) {
+                        ?>
+                        <p><?php echo substr($row["file_name"], 10)?></p>
+                        <?php
+                        }
+                    }else{
+                        echo "failed to check result";
+                    }
+                }else{
+            ?>
+            <p align="center">No files have been uploaded.</p>
+            <?php
+                    
+                }
+            ?>
+            </div>
         </div>
 
         <!-- About Tab -->

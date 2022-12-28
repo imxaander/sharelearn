@@ -1,17 +1,20 @@
 <?php
     #connection to database
     include 'connection.php';
+    include 'functions.php';
     date_default_timezone_set('Asia/Manila');
     $code_count = 5;
+    $code_start = -1;
+
     if(isset($_POST["submit"])) {
         #file upload
         if (isset($_POST["guest-id"])) {
             $guest_id = $_POST["guest-id"];
         }else{
-            $guest_id = substr(strtoupper(uniqid('GUEST')), $code_count);
+            $guest_id = strtoupper('GUEST' . generateRandomString($code_count));
         }
         #get values
-        $file_code = substr(strtoupper(uniqid('PNHS')), $code_count);
+        $file_code = strtoupper('PNHS' . generateRandomString($code_count));
         $file_expiration = "1 day";
         $file_security = "";
         $uploaded_date = Date("Y-m-d H:i:s");

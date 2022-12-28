@@ -148,6 +148,8 @@ body, html{
 }
 #code-input{
     border: none;
+    text-align: center;
+    background-color: none;
 }
 
 [type=radio] { 
