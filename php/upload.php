@@ -42,7 +42,7 @@
                     
                     $guest_type = $_POST["user-type"];
                     $date_joined = date("Y-m-d H:i:s");
-                    $sql = "INSERT INTO guest VALUES('$guest_id', '$guest_type', '$guest_device_id', '$date_joined' )";
+                    $sql = "INSERT INTO guest VALUES('$guest_id', '$guest_type', '$guest_device_id', '$date_joined', '' )";
                     $result = mysqli_query($con, $sql);
 
                     if ($result) {
@@ -72,7 +72,7 @@
           $uploadOk = 0;
         }
     }else{
-        header('Location: ../index.php');
+        header('Location: ../');
     }
 
 ?>

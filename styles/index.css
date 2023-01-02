@@ -184,3 +184,34 @@ label{
 #upload-loading{
     display: none;
 }
+#download-loading{
+    display: none;
+}
+#uploads-list{
+    margin: 20px;
+    
+}
+#uploads-list-table{
+    max-width: 100%;
+
+}
+#uploads-list-table tr td{
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    text-align: center;
+}
+#uploads-list-table th, td {
+    padding: 15px;
+}
+#uploads-list-table tr th{
+    text-align: center;
+}
+.code-copy{
+    background-color: #0B8043;
+    border-radius: 10px;
+}
+#upload-file{
+    display: block;
+}

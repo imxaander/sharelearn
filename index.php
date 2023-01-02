@@ -1,5 +1,6 @@
 <?php
     include 'php/connection.php';
+
     if(isset($_GET["uploaded"])){
         $upload_id = $_GET["uploaded"];
         $sql = "SELECT * FROM files WHERE file_code='$upload_id'";
@@ -13,6 +14,21 @@
         }
     }else{
         $uploaded = "redirectHome";
+    }
+
+    if(isset($_GET["search"])){
+        $file_code = $_GET["search"];
+        $sql = "SELECT * FROM files WHERE file_code='$file_code'";
+        $result = mysqli_query($con, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $file_code = $row["file_code"];
+        }else{
+            $file_code = "redirectHome";
+        }
+    }else{
+        $file_code = "redirectHome";
     }
 
     if(!isset($_COOKIE["device_id"])){
@@ -99,7 +115,6 @@
                             ?>
 
                     <input type="text" name="guest-id" value="<?php echo $row["guest_id"]; ?>" hidden>
-
                     <?php
                             }
                         }
@@ -112,13 +127,14 @@
                         </div>
                         <div class="forms-body">
                             <label>
-                                <input type="file" name="file" required>
+                                <input type="file" id="file-input"name="file" required>
                                 <i class="fa fa-upload" aria-hidden="true"></i>
                             </label>
                         </div>
                         <div class="forms-footer">
                             <p class="note">Note:  Before uploading files, make sure that you've read our Terms and Conditions. </p>
-                            <button type="submit" class="forms-next-button" name="submit">Upload</button>
+                            <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Back</button>
+                            <button type="submit" id="upload-button" class="forms-next-button" name="submit">Upload</button>
                         </div>
                     </div>
                 </form>
@@ -138,7 +154,69 @@
                 </div>
             <?php
                         }elseif ($_POST["action-type"] == "download") {
-                
+            ?>
+                <!-- Download File form-->
+                <form action="php/search.php" method="post">
+                    <input type="text" name="user-type" value="<?php echo $_POST["user-type"]; ?>" hidden>
+                    <input type="text" name="device-id" value="<?php
+                        if (isset($_COOKIE["device_id"])) {
+                            echo $_COOKIE["device_id"];
+                        }else{
+                            echo "NO COOKIES FOUND";
+                        }
+                    ?>" hidden>
+
+                    <?php
+                        //check if this "device_id" is set, then get the guest id and pass it.
+                        
+                        if (isset($_COOKIE["device_id"])) {
+                            $device_id=$_COOKIE["device_id"];
+                            $sql = "SELECT * FROM guest WHERE device_id = '$device_id'";
+                            $result = mysqli_query($con, $sql);
+
+                            if (mysqli_num_rows($result) > 0) {
+                            $row = mysqli_fetch_assoc($result);    
+                            ?>
+
+                    <input type="text" name="guest-id" value="<?php echo $row["guest_id"]; ?>" hidden>
+                    <?php
+                            }
+                        }
+                    ?>
+                    
+                    <div id="download-file">
+                        <div class="forms-banner">
+                            <h2 class="forms-title">Receive!</h2>
+                            <p class="forms-description">Now, paste or type the file code that has been shared to you, then click search</p>
+                        </div>
+                        <div class="forms-body" id="code-input-body">
+                            <i class="fa fa-clipboard" aria-hidden="true" id="paste-id-button"></i>
+
+                            <input type="text" id="code-input" name="file-code">
+                        </div>
+                        <div class="forms-footer">
+                            <p class="note">Note:  Before uploading files, make sure that you've read our Terms and Conditions. </p>
+                            <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Back</button>
+                            <button type="submit" id="search-button" class="forms-next-button" name="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Download Loading -->
+                <div id="download-loading">
+                    <div class="forms-banner">
+                        <h2 class="forms-title">Checking...</h2>
+                        <p class="forms-description">Wait for it to search for the file.</p> 
+                    </div>
+                    <div class="forms-body">
+                        <i class="fa fa-spinner fa-spin" style="color: #0B8043" aria-hidden="true"></i>
+                    </div>
+                    <div class="forms-footer">
+                        <p class="note">Note: Searching speed may vary. </p>
+                    </div>
+
+                </div>
+            <?php
                         }
             ?> 
             <?php
@@ -154,18 +232,19 @@
                         </div>
                         <div class="forms-body">
                             <label>
-                                <input type="radio" name="action-type" value="upload">
+                                <input type="radio" name="action-type" value="upload" required>
                                 <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                 <p class="forms-choice-description">Send File</p>
                             </label> 
                             <label>
-                                <input type="radio" name="action-type" value="download" >
+                                <input type="radio" name="action-type" value="download" required>
                                 <i class="fa fa-download" aria-hidden="true"></i>
-                                <p class="forms-choice-description">Recieve File</p>
+                                <p class="forms-choice-description">Receive File</p>
                             </label>
                         </div>
                         <br>
                         <div class="forms-footer">
+                            <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Back</button>
                             <button type="submit" class="forms-next-button">Next</button>
                         </div>
                     </div>       
@@ -194,6 +273,7 @@
                         <p class="note">Note:  Uploaded Files are only available within the day.  </p>
                         <form action="">
                             <button type="submit" class="forms-next-button" >Back to Home</button>
+                            <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Upload More</button>
                         </form>
                     </div>
                 </div>
@@ -201,9 +281,41 @@
                     }else{
                         header("Location: ../");
                     }
+                }elseif($file_code != 'redirectHome'){
+            ?>
+                <!-- Download File form-->
+                <div id="download-file">
+                    <div class="forms-banner">
+                        <h2 class="forms-title">File found!</h2>
+                        <p class="forms-description">There is no preview for this file. Click download to download the file. </p> 
+                    </div>
+                    <br>
+                        <p style="text-align: center;"> <?php echo substr($row["file_name"], 10)?></p>
+                    <br>
+                    <div class="forms-footer">
+                        <p class="note">Note:  Uploaded Files are only available within the day.  </p>
+                        <form action="php/download.php" method="post">
+                            <input type="text" name="file-code" value='<?php echo $row["file_code"]?>' hidden>
+                            <button type="submit" class="forms-next-button" name="submit">Download</button>
+                        </form>
+                    </div>
+                </div>
+            <?php
                 }else{
             ?>
                 <!-- User Type Selection -->
+                <?php
+                    if(isset($_GET["error"])){
+                ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong> <?php echo $_GET["error"]?> </strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+                </div>
+                <?php
+                    }
+                ?>
                 <form action="index.php" method="post">
                     <div id="user-selection">
                         <div class="forms-banner">
@@ -217,7 +329,7 @@
                                 <p class="forms-choice-description">Teacher</p>
                             </label> 
                             <label>
-                                <input type="radio" name="user-type" value="user" required>
+                                <input type="radio" name="user-type" value="student" required>
                                 <i class='fas fa-user-graduate'></i>
                                 <p class="forms-choice-description">Student</p>
                             </label>
@@ -237,10 +349,17 @@
         <!-- My Uploads -->
         <div id="MyUploads" class="tabs" style="display:none">
             <h2 align="center">My<font color="#0B8043">Uploads</font></h2>
+            <p class="note">Note:  </p>
             <div id="uploads-list">
+            <table id="uploads-list-table">
+                <tr>
+                    <th>File Name</th>
+                    <th>Date Uploaded</th>
+                    <th>Code</th>
+                </tr>
             <?php
-            //search for this device id, then if exists on the database, display all the files you have uploaded
-            //containing the file name, code, expiration
+                //search for this device id, then if exists on the database, display all the files you have uploaded
+                //containing the file name, code, expiration
                 $current_device_id = $_COOKIE["device_id"];
                 $sql = "SELECT * FROM guest WHERE device_id = '$current_device_id'";
                 $result = mysqli_query($con, $sql);
@@ -256,7 +375,17 @@
 
                         while ($row = mysqli_fetch_array($result) ) {
                         ?>
-                        <p><?php echo substr($row["file_name"], 10)?></p>
+                        <tr>
+                            <td>
+                                <?php echo substr($row["file_name"], 10)?>
+                            </td>
+                            <td>
+                                <?php echo date("M j, Y g:i a", strtotime($row["uploaded_date"]));   ?>
+                            </td>
+                            <td onclick="copyThisText('<?php echo $row["file_code"]?>')" class="code-copy">
+                                <?php echo $row["file_code"]?>
+                            </td>
+                        </tr>
                         <?php
                         }
                     }else{
@@ -264,11 +393,12 @@
                     }
                 }else{
             ?>
-            <p align="center">No files have been uploaded.</p>
+                    <p align="center">No files have been uploaded.</p>
+
             <?php
-                    
                 }
             ?>
+                </table>
             </div>
         </div>
 

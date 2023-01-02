@@ -52,20 +52,30 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " tab-selected";
 }
+
 function uploadLoading() {
     document.getElementById("upload-file").style.display = "none";
     document.getElementById("upload-loading").style.display = "block"
 }
 
+function copyThisText(text) {
+    navigator.clipboard.writeText(text);
+    alert("Copied the Code");
+}
+
+
 
 //jquery
 
-$('#upload-file').on("submit",()=>{
-    console.log("uploading...");
-    $('#upload-file').style.display = "none";
-    $('#upload-loading').style.display = "block";
-    
+$('#upload-button').on("click",()=>{
+    if(document.getElementById("file-input").files.length != 0 ){
+        document.getElementById('upload-file').style.display = "none";
+        document.getElementById('upload-loading').style.display = "block";
+    }else{
+        console.log("hello");
+    }
 })
+
 $('#copy-id-button').on('click', ()=>{
       // Get the text field
   var copyText = document.getElementById("code-input");
@@ -80,3 +90,4 @@ $('#copy-id-button').on('click', ()=>{
   // Alert the copied text
   alert("Copied the Code");
 })
+
