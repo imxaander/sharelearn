@@ -164,19 +164,21 @@ body, html{
     width: 0;
     height: 0;
 }
-[type=radio] + i {
+[type=radio] + svg {
     cursor: pointer;
 }
 
-[type=radio]:checked + i {
+[type=radio]:checked + svg {
     transition: all 0.3s;
     background-color: #0B8043;
     color: white;
-
 }
 label{
     color: #0B8043;
-
+}
+label svg{
+    padding: 5px;
+    border-radius: 5px;
 }
 #main-form-carousel{
     
@@ -192,8 +194,8 @@ label{
     
 }
 #uploads-list-table{
-    max-width: 100%;
-
+    width: 100%;
+    border-spacing: 10px;
 }
 #uploads-list-table tr td{
     max-width: 100px;

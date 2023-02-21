@@ -15,7 +15,7 @@
             $today = date("Y-m-d H:i:s");
             $expiration_date = strtotime($row["file_expiration"]);
 
-            if ($expiration_date > $today) {
+            if ($expiration_date < $today) {
 
                 $file = '../uploads/'.$row["file_name"];
 
@@ -33,16 +33,11 @@
             }else{
                 header("Location: ../?error=File Expired");
             }
-
         }else{
             echo "THERE IS NO result E ";
         }
-
-        }else{
-            header("Location: ../");
-        }
-
-       
-    echo "hi";
+    }else{
+        header("Location: ../");
+    }
     echo $_POST["file-code"];
 ?>

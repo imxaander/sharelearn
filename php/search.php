@@ -12,12 +12,18 @@
 
         if(mysqli_num_rows($result) > 0){
             header("Location:  ../?search=".$file_code);
-        }else{
-            echo "there is no file";
+        }else{?>
+<html>
+    <head>
+        <script>
+            window.history.back();
+        </script>
+    </head>
+</html>
+        <?php
+            
         }
     }else{
         header("Location:  ../");
     }
-    echo "hi";
-    echo $_POST["file-code"];
 ?>

@@ -1,6 +1,5 @@
 <?php
     include 'php/connection.php';
-
     if(isset($_GET["uploaded"])){
         $upload_id = $_GET["uploaded"];
         $sql = "SELECT * FROM files WHERE file_code='$upload_id'";
@@ -33,19 +32,21 @@
 
     if(!isset($_COOKIE["device_id"])){
         $uniqueIdGeneration = uniqid("SLUSER");
-        if (!setcookie("device_id",$uniqueIdGeneration)) {
-            echo "There's an error with the cookie setting. Please contact XANDER ISON for this issue";
+        $cookieExpiration = 366;
+        if (!setcookie("device_id",$uniqueIdGeneration, time()+60*60*24*$cookieExpiration)) {
+            echo "There's an error with the cookie setting.";
         }
     }
 ?>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="libs/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="styles/animations.css">
-    <script src="https://kit.fontawesome.com/6b9c8a6e93.js" crossorigin="anonymous"></script>
+    <script defer src="libs/fontawesome 6/js/all.js"></script>
+    <link href="libs/fontawesome 6/css/all.css" rel="stylesheet">
     <script src="scripts/index.js" defer></script>
     <title>ShareLearn - Paranaque National Highschool - Main</title>
 </head>
@@ -128,7 +129,7 @@
                         <div class="forms-body">
                             <label>
                                 <input type="file" id="file-input"name="file" required>
-                                <i class="fa fa-upload" aria-hidden="true"></i>
+                                <i class="fas fa-upload" aria-hidden="true"></i>
                             </label>
                         </div>
                         <div class="forms-footer">
@@ -192,10 +193,10 @@
                         <div class="forms-body" id="code-input-body">
                             <i class="fa fa-clipboard" aria-hidden="true" id="paste-id-button"></i>
 
-                            <input type="text" id="code-input" name="file-code">
+                            <input type="text" id="code-input" name="file-code" required>
                         </div>
                         <div class="forms-footer">
-                            <p class="note">Note:  Before uploading files, make sure that you've read our Terms and Conditions. </p>
+                            <p class="note">Note:  if search button returns you here, it means that there is no file with the code entered. </p>
                             <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Back</button>
                             <button type="submit" id="search-button" class="forms-next-button" name="submit">Search</button>
                         </div>
@@ -296,6 +297,7 @@
                         <p class="note">Note:  Uploaded Files are only available within the day.  </p>
                         <form action="php/download.php" method="post">
                             <input type="text" name="file-code" value='<?php echo $row["file_code"]?>' hidden>
+                            <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Back</button>
                             <button type="submit" class="forms-next-button" name="submit">Download</button>
                         </form>
                     </div>
@@ -324,7 +326,7 @@
                         </div>
                         <div class="forms-body">
                             <label>
-                                <input type="radio" name="user-type" value="teacher" required>
+                                <input type="radio" id="sd" name="user-type" value="teacher" required>
                                 <i class='fas fa-chalkboard-teacher'></i>
                                 <p class="forms-choice-description">Teacher</p>
                             </label> 
@@ -348,8 +350,8 @@
         
         <!-- My Uploads -->
         <div id="MyUploads" class="tabs" style="display:none">
-            <h2 align="center">My<font color="#0B8043">Uploads</font></h2>
-            <p class="note">Note:  </p>
+            <h2 align="center">My <font color="#0B8043">Uploads</font></h2>
+            <p class="note">Note:  Click the file code to copy it.</p>
             <div id="uploads-list">
             <table id="uploads-list-table">
                 <tr>
@@ -415,8 +417,10 @@
         </div>
 
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="libs/js/jquery.slim.min.js"></script>
+    <script src="libs/js/popper.min.js" 
+                crossorigin="anonymous">
+    </script>
+    <script src="libs/js/bootstrap.min.js"></script>
 </body>
 </html>

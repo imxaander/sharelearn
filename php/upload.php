@@ -24,7 +24,7 @@
         $uploadOk = 1;
 
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-        $maxFileSize = 104857600; #in bytes
+        $maxFileSize = 1048576000000000; #in bytes
         #check if file is actual image 
 
         $fileSize = filesize($_FILES["file"]["tmp_name"]);
