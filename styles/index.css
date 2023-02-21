@@ -37,7 +37,7 @@ body, html{
 #pnhslogo40px{
     height: 40px;
     width: 40px;
-    margin: 8px 4px 17px -4px;
+    margin: 8px 4px 46px -4px;
 }
 #side-nav-bar{
     width: 0%;
@@ -103,6 +103,7 @@ body, html{
     color:#0B8043;
     font-size: 40px;
     margin: 10px;
+    font-weight: bold;
 }
 .forms-description{
     text-align: center;
@@ -141,6 +142,7 @@ body, html{
     font-size: 16px;
     border: solid #0B8043 2px;
     width: 80%;
+    max-width: 250px;
     margin: auto;
     padding: 5px;
     border-radius: 10px;
@@ -190,30 +192,85 @@ label svg{
     display: none;
 }
 #uploads-list{
-    margin: 20px;
-    
+    margin: 10px;
 }
 #uploads-list-table{
     width: 100%;
-    border-spacing: 10px;
+    border-collapse:unset;
 }
+#uploads-list-table th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #0B8043;
+    color: white;
+}
+#uploads-list-table  td, #uploads-list-table  th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+#uploads-list-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#uploads-list-table tr:hover {background-color: #ddd;}
 #uploads-list-table tr td{
     max-width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: initial;
     text-align: center;
+    -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
 }
-#uploads-list-table th, td {
-    padding: 15px;
-}
+
 #uploads-list-table tr th{
     text-align: center;
 }
 .code-copy{
     background-color: #0B8043;
     border-radius: 10px;
+    color: white;
+    padding: 10px;
+    padding-left: 3px;
+    cursor: pointer;
+}
+.code-copy:hover{
+    background-color: #095e32
 }
 #upload-file{
     display: block;
+}
+
+.bold{
+    font-weight: bold;
+}
+#tac-paragraph{
+
+}
+#Terms-and-Conditions p{
+    margin-top: 10px;
+	margin-bottom: 10px;
+	line-height: 1.5;
+}
+#Terms-and-Conditions h4{
+    font-weight: bold;
+}
+#tac-list{
+    margin:auto;
+    margin: 10px;
+
+}
+#tac-list p{
+
+    text-indent: 30px;
+}
+#About p{
+    margin-top: 10px;
+	line-height: 1.5;
+    text-indent: 30px;
+}
+#about-desc{
+    margin:auto;
+    margin: 10px;
+
 }

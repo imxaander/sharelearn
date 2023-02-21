@@ -63,7 +63,6 @@
     <div id="top-nav-bar">
         <i class="fas fa-bars" aria-hidden="true" id="open-side-bar-button" onclick="openSideBar()"></i>
         <img src="img/pnhs_logo_255px.jpg" id="pnhslogo40px">
-        ShareLearn
     </div>
 
     <!-- Side Navigation Bar -->
@@ -133,7 +132,7 @@
                             </label>
                         </div>
                         <div class="forms-footer">
-                            <p class="note">Note:  Before uploading files, make sure that you've read our Terms and Conditions. </p>
+                            <p class="note"><b> Note </b>:  Before uploading files, make sure that you've read our Terms and Conditions. </p>
                             <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Back</button>
                             <button type="submit" id="upload-button" class="forms-next-button" name="submit">Upload</button>
                         </div>
@@ -149,7 +148,7 @@
                         <i class="fa fa-spinner fa-spin" style="color: #0B8043" aria-hidden="true"></i>
                     </div>
                     <div class="forms-footer">
-                        <p class="note">Note: Upload speed may vary. </p>
+                        <p class="note"><b> Note </b>: Upload speed may vary. </p>
                     </div>
 
                 </div>
@@ -196,7 +195,7 @@
                             <input type="text" id="code-input" name="file-code" required>
                         </div>
                         <div class="forms-footer">
-                            <p class="note">Note:  if search button returns you here, it means that there is no file with the code entered. </p>
+                            <p class="note"><b> Note </b>:  if search button returns you here, it means that there is no file with the code entered. </p>
                             <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Back</button>
                             <button type="submit" id="search-button" class="forms-next-button" name="submit">Search</button>
                         </div>
@@ -213,7 +212,7 @@
                         <i class="fa fa-spinner fa-spin" style="color: #0B8043" aria-hidden="true"></i>
                     </div>
                     <div class="forms-footer">
-                        <p class="note">Note: Searching speed may vary. </p>
+                        <p class="note"><b> Note </b>: Searching speed may vary. </p>
                     </div>
 
                 </div>
@@ -271,7 +270,7 @@
                     </div>
                     <br>
                     <div class="forms-footer">
-                        <p class="note">Note:  Uploaded Files are only available within the day.  </p>
+                        <p class="note"><b> Note </b>:  Uploaded Files are only available within the day.  </p>
                         <form action="">
                             <button type="submit" class="forms-next-button" >Back to Home</button>
                             <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Upload More</button>
@@ -294,7 +293,7 @@
                         <p style="text-align: center;"> <?php echo substr($row["file_name"], 10)?></p>
                     <br>
                     <div class="forms-footer">
-                        <p class="note">Note:  Uploaded Files are only available within the day.  </p>
+                        <p class="note"><b> Note </b>:  Uploaded Files are only available within the day.  </p>
                         <form action="php/download.php" method="post">
                             <input type="text" name="file-code" value='<?php echo $row["file_code"]?>' hidden>
                             <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Back</button>
@@ -350,8 +349,9 @@
         
         <!-- My Uploads -->
         <div id="MyUploads" class="tabs" style="display:none">
-            <h2 align="center">My <font color="#0B8043">Uploads</font></h2>
-            <p class="note">Note:  Click the file code to copy it.</p>
+        <br>
+            <h2 align="center" class="bold">My <font color="#0B8043">Uploads</font></h2>
+            <p class="note"><b> Note </b>:  Click the file code to copy it.</p>
             <div id="uploads-list">
             <table id="uploads-list-table">
                 <tr>
@@ -362,7 +362,7 @@
             <?php
                 //search for this device id, then if exists on the database, display all the files you have uploaded
                 //containing the file name, code, expiration
-                $current_device_id = $_COOKIE["device_id"];
+                $current_device_id = $_COOKIE["device_id"]; 
                 $sql = "SELECT * FROM guest WHERE device_id = '$current_device_id'";
                 $result = mysqli_query($con, $sql);
 
@@ -384,8 +384,8 @@
                             <td>
                                 <?php echo date("M j, Y g:i a", strtotime($row["uploaded_date"]));   ?>
                             </td>
-                            <td onclick="copyThisText('<?php echo $row["file_code"]?>')" class="code-copy">
-                                <?php echo $row["file_code"]?>
+                            <td onclick="copyThisText('<?php echo $row["file_code"]?>')" >
+                                <p class="code-copy"><?php echo $row["file_code"]?></p>
                             </td>
                         </tr>
                         <?php
@@ -396,7 +396,6 @@
                 }else{
             ?>
                     <p align="center">No files have been uploaded.</p>
-
             <?php
                 }
             ?>
@@ -406,14 +405,50 @@
 
         <!-- About Tab -->
         <div id="About" class="tabs" style="display:none">
-            <h2 align="center">What is <font color="#0B8043">Sharelearn</font>?</h2>
-            <p>Paris is the capital of France.</p> 
+        <br>
+            <h2 align="center" class="bold"><font color="#0B8043">ShareLearn</font></h2>
+            <p class="bold">A Convenient and Collaborative File Sharing System for PNHS</p>
+
+            <div id="about-desc">
+            <p>ShareLearn is a file sharing system designed to help students and teachers at your school easily and efficiently share files with one another. With ShareLearn, users can upload and download files to a central location within the school's network, making it easy to access important course materials, assignments, and other resources.</p>
+<p>The system is named ShareLearn because it is intended to facilitate knowledge sharing and collaboration among students and teachers. By providing a centralized platform for file sharing, ShareLearn can help to reduce the time and effort required to manage and distribute course materials, and can help to foster a more collaborative learning environment.</p>
+<p>In addition to its file sharing capabilities, ShareLearn also includes features such as user authentication, file version control, and access controls, to help ensure the security and integrity of the files being shared.</p>
+<p>By implementing ShareLearn, your school can provide a more efficient and convenient way for students and teachers to collaborate and share knowledge, and can help to improve the overall learning experience for everyone involved.</p></div>
         </div>
 
         <!-- Terms and Conditions Tab -->
         <div id="Terms-and-Conditions" class="tabs" style="display:none">
-            <h2>Tokyo</h2>
-            <p>Tokyo is the capital of Japan.</p>
+        <br>
+            <h2  align="center" class="bold" > <font color="#0B8043">Terms and Conditions</font></h2>
+            <br>
+            <div id="tac-list">
+                <h4>1. Scope of Services</h4>
+                <p>Our file sharing system is a service designed to enable students and teachers within the school to share files with each other. The files that can be shared include any type of file, and there are no restrictions.</p>
+	
+                <h4>2. User Conduct</h4>
+                <p>Users of the file sharing system must conduct themselves in a manner that is consistent with the school's values and policies. Users must not engage in any activity that is illegal or that violates the rights of others.</p>
+                
+                <h4>3. Monitoring</h4>
+                <p>We will monitor the use of the file sharing system, including recording the upload times and frequency of file sharing by students and teachers. This monitoring is intended to ensure that the file sharing system is used in accordance with the terms and conditions and to identify any potential misuse.</p>
+                
+                <h4>4. No Fees</h4>
+                <p>Our file sharing system is provided to students and teachers at no cost.</p>
+                
+                <h4>5. Responsibility for Uploaded Files</h4>
+                <p>Users are solely responsible for the files they upload and share through the file sharing system. Our system is not responsible for the content of the files shared or for any consequences that may arise from the use of the files.</p>
+                
+                <h4>6. No Third-Party Sharing</h4>
+                <p>Files uploaded to the file sharing system will not be shared with any third-party websites or services.</p>
+                
+                <h4>7. User Privacy</h4>
+                <p>We will protect the personal information of our users by not collecting any information other than the fact that the user is a student or teacher and the files that they upload. Cookies may be used to identify the user's device.</p>
+                
+                <h4>8. Acceptance of Terms and Conditions</h4>
+                <p>By using our file sharing system, users agree to be bound by these terms and conditions. If a user does not agree to these terms and conditions, they must not use the file sharing system.</p>
+
+                <button onclick="closeSideBar(); openTab(event, 'Home')" type="button" id="agree-btn" class="forms-next-button" style="  display: block;
+  margin: 0 auto; color: white;" >I Agree</button>
+            </div>
         </div>
 
     </div>
