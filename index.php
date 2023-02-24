@@ -1,5 +1,19 @@
 <?php
     include 'php/connection.php';
+    include 'php/functions.php';
+
+    if (isset($_COOKIE["device_id"])) {
+        $device_id=$_COOKIE["device_id"];
+        $sql = "SELECT guest_id FROM guest WHERE device_id = '$device_id'";
+        $result = mysqli_query($con, $sql);
+
+        if($result){
+            while($row = mysqli_fetch_array($result)) {
+                $current_guest_id = $row["guest_id"];
+            }
+        }
+    }
+
     if(isset($_GET["uploaded"])){
         $upload_id = $_GET["uploaded"];
         $sql = "SELECT * FROM files WHERE file_code='$upload_id'";
@@ -37,6 +51,8 @@
             echo "There's an error with the cookie setting.";
         }
     }
+
+
 ?>
 <html lang="en">
 <head>
@@ -112,9 +128,10 @@
                             $result = mysqli_query($con, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
-                            $row = mysqli_fetch_assoc($result);    
-                            ?>
+                            $row = mysqli_fetch_assoc($result);  
 
+                            ?>
+                    
                     <input type="text" name="guest-id" value="<?php echo $row["guest_id"]; ?>" hidden>
                     <?php
                             }
@@ -296,6 +313,8 @@
                     <div class="forms-footer">
                         <p class="note"><b> Note </b>:  Uploaded Files are only available within the day.  </p>
                         <form action="php/download.php" method="post">
+                            
+                            <input type="text" name="guest-id" value="<?php echo $current_guest_id ?>" hidden>
                             <input type="text" name="file-code" value='<?php echo $row["file_code"]?>' hidden>
                             <button type="button" onclick="history.back()"class="forms-next-button" name="submit">Back</button>
                             <button type="submit" class="forms-next-button" name="submit">Download</button>
@@ -346,27 +365,11 @@
                 <div>
                     <canvas id="myPieChart"></canvas>
                 </div>
+
+                <!-- logs -->
                 <div id="logs">
 
-                    <div class="logs-wrapper upload-log">
-                        <div class="logs-icon-upload"><i class="fa-solid fa-upload"></i></div>
-                        <div class="logs-container">
-                                <div class="log">
-                                    <p><b>  SLUSER1</b> uploaded : <b> meow_cat.jpg </b> </p>
-                                    <p class="log-date">Feb 24, 2023 at 11:21 PM via UserUpload</p>
-                                </div>
-                        </div>
-                    </div>
-
-                    <div class="logs-wrapper download-log">
-                        <div class="logs-icon-download"><i class="fa-solid fa-download"></i></div>
-                        <div class="logs-container">
-                                <div class="log">
-                                    <p><b>  SLUSER1</b> downloaded : <b> meow_cat.jpg </b> </p>
-                                    <p class="log-date">Feb 24, 2023 at 11:21 PM via UserUpload</p>
-                                </div>
-                        </div>
-                    </div>
+                    <?php displayLogs("","") ?>
 
                 </div>
 
@@ -404,7 +407,7 @@
 
                     if ($result) {
 
-                        while ($row = mysqli_fetch_array($result) ) {
+                        while ($row = mysqli_fetch_array($result)) {
                         ?>
                         <tr>
                             <td>
@@ -434,16 +437,19 @@
 
         <!-- About Tab -->
         <div id="About" class="tabs" style="display:none">
-        <br>
+            <br>
             <h2 align="center" class="bold"><font color="#0B8043">ShareLearn</font></h2>
             <p class="bold">A Convenient and Collaborative File Sharing System for PNHS</p>
 
             <div id="about-desc">
-            <p>ShareLearn is a file sharing system designed to help students and teachers at your school easily and efficiently share files with one another. With ShareLearn, users can upload and download files to a central location within the school's network, making it easy to access important course materials, assignments, and other resources.</p>
-<p>The system is named ShareLearn because it is intended to facilitate knowledge sharing and collaboration among students and teachers. By providing a centralized platform for file sharing, ShareLearn can help to reduce the time and effort required to manage and distribute course materials, and can help to foster a more collaborative learning environment.</p>
-<p>In addition to its file sharing capabilities, ShareLearn also includes features such as user authentication, file version control, and access controls, to help ensure the security and integrity of the files being shared.</p>
-<p>By implementing ShareLearn, your school can provide a more efficient and convenient way for students and teachers to collaborate and share knowledge, and can help to improve the overall learning experience for everyone involved.</p></div>
+                <p>ShareLearn is a file sharing system designed to help students and teachers at your school easily and efficiently share files with one another. With ShareLearn, users can upload and download files to a central location within the school's network, making it easy to access important course materials, assignments, and other resources.</p>
+                <p>The system is named ShareLearn because it is intended to facilitate knowledge sharing and collaboration among students and teachers. By providing a centralized platform for file sharing, ShareLearn can help to reduce the time and effort required to manage and distribute course materials, and can help to foster a more collaborative learning environment.</p>
+                <p>In addition to its file sharing capabilities, ShareLearn also includes features such as user authentication, file version control, and access controls, to help ensure the security and integrity of the files being shared.</p>
+                <p>By implementing ShareLearn, your school can provide a more efficient and convenient way for students and teachers to collaborate and share knowledge, and can help to improve the overall learning experience for everyone involved.</p>
+            </div>
         </div>
+
+        
 
         <!-- Terms and Conditions Tab -->
         <div id="Terms-and-Conditions" class="tabs" style="display:none">

@@ -1,6 +1,6 @@
 <?php
 include "connection.php";
-
+date_default_timezone_set('Asia/Manila');
 function generateRandomString($length) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
@@ -11,10 +11,10 @@ function generateRandomString($length) {
     return $randomString;
 }
 
-function addLog($type, $details, $timestamp){
+function addLog($type, $details, $timestamp, $duration, $user){
     global $con;
-    $logId = "" .  strtoupper(generateRandomString(5));
-    $sql = "INSERT INTO logs VALUES('$logId','$type', '$details', '$timestamp')";
+    $logId = "LOG" .  strtoupper(generateRandomString(5));
+    $sql = "INSERT INTO logs VALUES('$logId','$type', '$details', '$timestamp', '$duration', '$user')";
     $result = mysqli_query($con, $sql);
 
     if($result){
@@ -52,5 +52,77 @@ function measure_download_speed($file_url)
         return round($download_speed / 1048576, 2) . " MB/s";
     }
 }
+
+function measure_upload_speed($file) {
+    $start_time = microtime(true);
+
+    if ($file && $file['error'] === UPLOAD_ERR_OK) {
+        $target_file = basename($file['name']);
+        move_uploaded_file($file['tmp_name'], $target_file);
+    } else {
+        return false;
+    }
+
+    $end_time = microtime(true);
+    $elapsed_time = $end_time - $start_time;
+    $upload_speed = $file['size'] / $elapsed_time;
+
+    return $upload_speed;
+}
+
+function format_speed($speed) {
+    if ($speed < 1024) {
+        return $speed . ' B/s';
+    } else if ($speed < 1048576) {
+        return round($speed / 1024, 2) . ' KB/s';
+    } else if ($speed < 1073741824) {
+        return round($speed / 1048576, 2) . ' MB/s';
+    } else {
+        return round($speed / 1073741824, 2) . ' GB/s';
+    }
+}
+
+function displayLogs($type, $arg){
+    global $con;
+    if(isset($type)){
+        $sql = "SELECT * FROM logs WHERE '$type'='$arg' ORDER BY timestamp DESC";
+    }else{
+        $sql = "SELECT * FROM logs ORDER BY timestamp DESC";
+    }
+
+    $result = mysqli_query($con, $sql);
+    if($result){
+        while($row = mysqli_fetch_array($result)){
+            $timestamp = $row["timestamp"];
+            $date_format = 'M d, Y \a\t h:i A';
+            $date_string = date($date_format, $timestamp);
+
+            $action = strtolower($row["type"]);
+
+            $message = "none";
+            ?>
+            <div class="logs-wrapper <?php echo $action?>-log">
+                <?php
+                if ($action == "upload") {
+                    $message = "has uploaded";
+                    echo '<div class="logs-icon-upload"><i class="fa-solid fa-upload"></i></div>';
+                }else if ($action == "download") {
+                    $message = "has downloaded";
+                    echo '<div class="logs-icon-download"><i class="fa-solid fa-download"></i></div>';
+                }
+                ?>
+                
+                    <div class="logs-container">
+                        <div class="log">
+                                <p><b>  <?php echo $row["user"]?></b> <?php echo $message?>  <b> <?php echo $row["details"]?></b> </p>
+                                <p class="log-date"><?php echo $date_string?> - <?php echo $row["duration"]?></p>
+                        </div>
+                    </div>
+                </div>
+        <?php
+        }
+    }
+}
+
 
 ?>

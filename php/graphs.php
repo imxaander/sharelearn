@@ -4,13 +4,13 @@
     include 'functions.php';
 
     if ($_GET["q"] == "fileTypes") {
-        $sql = "SELECT details FROM logs WHERE type = 'Upload'";
+        $sql = "SELECT file_name FROM files";
         $result = mysqli_query($con, $sql);
         
         // Step 2: Extract the file extension for each file name
         $extensions = array();
         while ($row = mysqli_fetch_assoc($result)) {
-            $extension = pathinfo($row['details'], PATHINFO_EXTENSION);
+            $extension = pathinfo($row['file_name'], PATHINFO_EXTENSION);
             $extensions[] = $extension;
         }
         

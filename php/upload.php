@@ -60,7 +60,7 @@
                 $sql = "INSERT INTO files VALUES('', '$file_code', '$guest_id', '$file_name', '$date_expiration', 'private', '$uploaded_date')";
                 $result = mysqli_query($con, $sql);
                 if ($result) {
-                    addLog("Upload", "$file_name", time());
+                    addLog("Upload", "$file_code ", time(), format_speed(measure_upload_speed($_FILES["file"])), "$guest_id");
                     header("Location: ../?uploaded=".$file_code);
                 }
 

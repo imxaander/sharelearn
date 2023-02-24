@@ -17,7 +17,7 @@
 
             if ($expiration_date < $today) {
 
-                $file = '../uploads/'.$row["file_name"];
+                $file = '../uploads/' . $row["file_name"];
 
                 if (file_exists($file)) {
                     header('Content-Description: File Transfer');
@@ -28,16 +28,26 @@
                     header('Pragma: public');
                     header('Content-Length: ' . filesize($file));
                     readfile($file);
+
+                    $type = "Download";
+                    $details = "$file_code";
+                    $timestamp = time();
+                    $duration = measure_download_speed($file);
+                    $guest_id = $_POST["guest-id"];
+                    addLog($type, $details, $timestamp, $duration, $guest_id);
                     exit();
+                }else{
+                    echo $file;
+                    echo getcwd();
                 }
             }else{
                 header("Location: ../?error=File Expired");
             }
         }else{
             echo "THERE IS NO result E ";
+            echo $sql;
         }
     }else{
         header("Location: ../");
     }
-    echo $_POST["file-code"];
 ?>
