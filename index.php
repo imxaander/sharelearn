@@ -48,6 +48,7 @@
     <script defer src="libs/fontawesome 6/js/all.js"></script>
     <link href="libs/fontawesome 6/css/all.css" rel="stylesheet">
     <script src="scripts/index.js" defer></script>
+    <script src="libs/chartjs/dist/chart.umd.js"></script>
     <title>ShareLearn - Paranaque National Highschool - Main</title>
 </head>
 <body>
@@ -341,6 +342,34 @@
                         </div>
                     </div>
                 </form>
+                <!-- end  uwu testing -->
+                <div>
+                    <canvas id="myPieChart"></canvas>
+                </div>
+                <div id="logs">
+
+                    <div class="logs-wrapper upload-log">
+                        <div class="logs-icon-upload"><i class="fa-solid fa-upload"></i></div>
+                        <div class="logs-container">
+                                <div class="log">
+                                    <p><b>  SLUSER1</b> uploaded : <b> meow_cat.jpg </b> </p>
+                                    <p class="log-date">Feb 24, 2023 at 11:21 PM via UserUpload</p>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="logs-wrapper download-log">
+                        <div class="logs-icon-download"><i class="fa-solid fa-download"></i></div>
+                        <div class="logs-container">
+                                <div class="log">
+                                    <p><b>  SLUSER1</b> downloaded : <b> meow_cat.jpg </b> </p>
+                                    <p class="log-date">Feb 24, 2023 at 11:21 PM via UserUpload</p>
+                                </div>
+                        </div>
+                    </div>
+
+                </div>
+
             <?php
                 }
             ?>
@@ -353,7 +382,7 @@
             <h2 align="center" class="bold">My <font color="#0B8043">Uploads</font></h2>
             <p class="note"><b> Note </b>:  Click the file code to copy it.</p>
             <div id="uploads-list">
-            <table id="uploads-list-table">
+            <table class="table">
                 <tr>
                     <th>File Name</th>
                     <th>Date Uploaded</th>
@@ -452,7 +481,7 @@
         </div>
 
     </div>
-    <script src="libs/js/jquery.slim.min.js"></script>
+    <script src="libs/js/jquery.js"></script>
     <script src="libs/js/popper.min.js" 
                 crossorigin="anonymous">
     </script>

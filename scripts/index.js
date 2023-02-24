@@ -91,3 +91,54 @@ $('#copy-id-button').on('click', ()=>{
   alert("Copied the Code");
 })
 
+
+
+$.ajax({
+  url: './php/graphs.php?q=fileTypes',
+  type: 'GET',
+  dataType: 'json',
+  success: function(data) {
+    
+    var labels = [];
+    var values = [];
+    var backgroundColors = [];
+    var hoverBackgroundColors = [];
+    
+    // loop through the data and extract the labels and values
+    for (var i = 0; i < data.length; i++) {
+      labels.push(data[i].label);
+      values.push(data[i].value);
+      backgroundColors.push(getRandomColor());
+      hoverBackgroundColors.push(getRandomColor());
+    }
+    console.log(labels)
+    // create the pie chart
+    var ctx = document.getElementById('myPieChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: values,
+          backgroundColor: backgroundColors,
+          hoverBackgroundColor: hoverBackgroundColors
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  },
+  error: function(xhr, status, error) {
+    console.log(error);
+  }
+});
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}

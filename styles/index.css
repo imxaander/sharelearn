@@ -194,25 +194,23 @@ label svg{
 #uploads-list{
     margin: 10px;
 }
-#uploads-list-table{
+.table{
     width: 100%;
     border-collapse:unset;
 }
-#uploads-list-table th{
-    padding-top: 12px;
-    padding-bottom: 12px;
+.table th{
     text-align: left;
     background-color: #0B8043;
     color: white;
 }
-#uploads-list-table  td, #uploads-list-table  th {
+.table  td, .table  th {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 0px;
   }
-#uploads-list-table tr:nth-child(even){background-color: #f2f2f2;}
+.table tr:nth-child(even){background-color: #f2f2f2;}
 
-#uploads-list-table tr:hover {background-color: #ddd;}
-#uploads-list-table tr td{
+.table tr:hover {background-color: #ddd;}
+.table tr td{
     max-width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -223,7 +221,7 @@ label svg{
    -webkit-box-orient: vertical;
 }
 
-#uploads-list-table tr th{
+.table tr th{
     text-align: center;
 }
 .code-copy{
@@ -272,5 +270,27 @@ label svg{
 #about-desc{
     margin:auto;
     margin: 10px;
+}
 
+.logs-wrapper{
+    margin: 10px;
+    display:flex;
+}
+.logs-icon-upload{
+    font-size: 23px;
+    color: #007bff;
+}
+.logs-icon-download{
+    font-size: 23px;
+    color: #28a745;
+}
+.logs-container{
+    margin-left: 20px;
+}
+.actionUpload{
+    background-color: #007bff;
+}
+.log-date{
+    color: #6c757d;
+    font-size: 12px;
 }
