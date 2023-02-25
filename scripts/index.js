@@ -142,3 +142,19 @@ function getRandomColor() {
   }
   return color;
 }
+
+function selectRole(role) {
+  const white = document.querySelector('.white-background');
+  white.classList.add('animateExpand');
+
+  var id = role + "-selection";
+  var icon = id  + "-icon";
+  var element = document.getElementById(icon)
+  element.classList.add('animateCenter')
+
+  console.log(role);
+  var roleInput = document.getElementById("role-input")
+  roleInput.value = role
+  setTimeout(function(){  document.getElementById("guestForm").submit()}, 1000)
+
+}

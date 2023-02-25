@@ -2,6 +2,7 @@ body, html{
     margin: 0px;
     padding: 0px;
     font-family: Open Sans;
+    height: 100%;
 }
 #top-bar{
     background-color: #0B8043;
@@ -293,4 +294,93 @@ label svg{
 .log-date{
     color: #6c757d;
     font-size: 12px;
+}
+.role-selection{
+    width: auto;
+    height: 50%;
+    text-align: center;
+    display: table;
+    width: 100%;
+}
+.role-selection svg{
+    font-size: 150px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    
+}
+.role-selection p{
+    font-size: 30px;
+    display: inline-block;
+    width: 100%;
+}
+#student-selection{
+    background-color:#0B8043;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s;
+
+}
+.role-selection-icons{
+
+
+}
+#teacher-selection{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.white-background {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 0;
+    background-color: white;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+  
+  .animateExpand{
+    animation-name: expand;
+  }
+  
+  @keyframes expand {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 100%;
+        }
+    }
+.animateCenter{
+    animation-name: centerIcon;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #0B8043;
+    transition: 0.3s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes centerIcon {
+    0% {
+        transform: translate(-50%, -100%);
+        opacity: 10%;
+    }
+    100% {
+        position: fixed;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: #0B8043;
+    }
+    
+}
+.alert{
+    margin-bottom: 0px !important;
+    display: flex !important;
 }

@@ -1,5 +1,6 @@
 <?php
 include "connection.php";
+
 date_default_timezone_set('Asia/Manila');
 function generateRandomString($length) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -123,6 +124,31 @@ function displayLogs($type, $arg){
         }
     }
 }
+function redirectToHome(){
+    header("Location: ../");
+}
+function alert($type, $message){
+    session_start();
 
+    $_SESSION["alert"] = 1;
+    $_SESSION["alert_message"] = $message;
+    $_SESSION["alert_type"] = $type;
+}
+function displayAlerts(){
+    if (isset($_SESSION["alert"])) {
+        $message = $_SESSION["alert_message"];
+        $type = $_SESSION["alert_type"];
 
+        echo '<div class="alert alert-'.$type.'" role="alert">'.$message.'
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        <br>
+        </div>';
+
+        unset($_SESSION["alert"]);
+        unset($_SESSION["alert_message"]);
+        unset($_SESSION["alert_type"]);
+    }
+}
 ?>
