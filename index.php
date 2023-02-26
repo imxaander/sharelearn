@@ -40,10 +40,88 @@
         <div id="top-nav-bar">
             <a class="fas fa-bars" aria-hidden="true" id="open-side-bar-button" onclick="openSideBar()"><i class="fa-solid fa-ellipsis-vertical"></i></a>
             <img src="img/pnhs_logo_255px.jpg" id="pnhslogo40px">
+            <p>ShareLearn</p>
+        </div>
+       <!-- Side Navigation Bar  -->
+    <div id="side-nav-bar">
+            <i id="close-side-bar-button" onclick="closeSideBar()" class="fa fa-close"></i>
+            <br><br>
+            <a href=""></a>
+            <br><br><br><br><br><br>
+            <a href="">Login</a>
+            <p>Have an account?</p>
+            <a href="">Register</a>
+            <p>Don't have an account yet?</p>
         </div>
 
-        <!-- Side Navigation Bar -->
-        <div id="side-nav-bar">
+        <!-- Bottom Navigation Bar -->
+        <div id="bottom-nav-bar">
+            <a href="#" onclick="openTab(event, 'Home')" class="tablinks tab-selected"><i class="fa-solid fa-house"></i><p>Home</p></a>
+            <a href="#" onclick="openTab(event, 'Upload')" class="tablinks"><i class="fa-solid fa-upload"></i><p>Download</p></a>
+            <a href="#" onclick="openTab(event, 'Download')" class="tablinks"><i class="fa-solid fa-download"></i><p>Upload</p></a>
+            <a href="#" onclick="openTab(event, 'Files')" class="tablinks"><i class="fa-solid fa-file"></i><p>Files</p></a>
+                <!-- terms and conditions
+            <a href="#" onclick="closeSideBar(); openTab(event, 'Terms-and-Conditions')" class="tablinks">Terms and Conditions</a>
+            -->
+        </div>
+
+        <div id="Home" class="tabs">
+            HOME
+            <br>
+            <button onclick="removeCookies()"class="forms-next-button">Tester? Remove Cookies</button>
+            <br>
+            <br>
+            <button href="access.php" class="forms-next-button">Login / Register</button>
+        </div>
+
+        <div id="Upload" class="tabs">
+            UPLOAD
+        </div>
+
+        <div id="Download" class="tabs">
+            DOWNLOAD
+        </div>
+
+        <div id="Files" class="tabs">
+            FILES
+        </div>
+        
+        <?php
+        }else{?>
+        <div class="white-background">
+            <h1><b>ShareLearn</b></h1>
+            <i>
+            <p><b>Share</b> your files right away,</p>
+            <p><b>Learn</b> from it right away.</p>
+        </i>
+        <i class="fa-solid fa-circle-notch fa-spin"></i>
+
+        </div>
+        <div class="role-selection" id="student-selection" onclick="selectRole('student')">
+            <br>
+            <i class="fa-solid fa-graduation-cap role-selection-icons" id="student-selection-icon"></i>
+            <p id="student-selection-text">STUDENT</p>
+        </div>
+        <div class="role-selection" id="teacher-selection" onclick="selectRole('teacher')">
+            <br>
+            <i class="fa-solid fa-chalkboard-user role-selection-icons"id="teacher-selection-icon" ></i>
+            <p id="teacher-selection-text">TEACHER</p>
+        </div>
+        <form action="php/guestCreate.php" method="POST" id="guestForm" style="display: none">
+            <input type="text" name="role" id="role-input">
+        </form>
+        <?php
+        }?>
+
+        <script src="libs/js/jquery.js"></script>
+        <script src="libs/js/popper.min.js" crossorigin="anonymous"></script>
+        <script src="libs/js/bootstrap.min.js"></script>
+    </body>
+</html>
+
+<!-- 
+     Side Navigation Bar 
+    <div id="side-nav-bar">
             <i id="close-side-bar-button" onclick="closeSideBar()" class="fa fa-close"></i>
             <br><br>
             <a href="#" onclick="closeSideBar(); openTab(event, 'Home')" class="tablinks tab-selected">Home</a>
@@ -56,42 +134,4 @@
             <a href="">Login</a>
             <p>For Researchers Only!</p>
         </div>
-            <br>
-        <button onclick="removeCookies()"class="forms-next-button">Tester? Remove Cookies</button>
-        <button href="access.php" class="forms-next-button">Login / Register</button>
-        <!-- Bottom Navigation Bar -->
-        <div id="bottom-nav-bar">
-        <a href="#" onclick="closeSideBar(); openTab(event, 'Home')" class="tablinks tab-selected"><i class="fa-solid fa-house"></i></a>
-            <a href="#" onclick="closeSideBar(); openTab(event, 'Upload')" class="tablinks"><i class="fa-solid fa-file-arrow-up"></i></a>
-            <a href="#" onclick="closeSideBar(); openTab(event, 'Download')" class="tablinks"><i class="fa-solid fa-file-arrow-down"></i></a>
-            <a href="#" onclick="closeSideBar(); openTab(event, 'Files')" class="tablinks"><i class="fa-solid fa-file"></i></a>
-            <!-- terms and conditions
-            <a href="#" onclick="closeSideBar(); openTab(event, 'Terms-and-Conditions')" class="tablinks">Terms and Conditions</a>
-            -->
-        </div>
-        
-        <?php
-        }else{?>
-        <div class="white-background"></div>
-        <div class="role-selection" id="student-selection" onclick="selectRole('student')">
-            <br>
-            <i class="fa-solid fa-graduation-cap role-selection-icons" id="student-selection-icon"></i>
-            <p id="student-selection-text">STUDENT</p>
-        </div>
-        <div class="role-selection" id="teacher-selection" onclick="selectRole('teacher')">
-            <br>
-            <i class="fa-solid fa-chalkboard-user role-selection-icons"id="teacher-selection-icon" ></i>
-            <p id="teacher-selection-text">TEACHER</p>
-        </div>
-        <form action="php/guestCreate.php" method="POST" id="guestForm">
-            <input type="text" name="role" id="role-input">
-        </form>
-        <?php
-        }?>
-
-        <script src="libs/js/jquery.js"></script>
-        <script src="libs/js/popper.min.js" crossorigin="anonymous"></script>
-        <script src="libs/js/bootstrap.min.js"></script>
-    </body>
-</html>
-
+-->

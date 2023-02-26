@@ -155,8 +155,7 @@ function selectRole(role) {
   console.log(role);
   var roleInput = document.getElementById("role-input")
   roleInput.value = role
-  setTimeout(function(){  document.getElementById("guestForm").submit()}, 1000)
-
+  setTimeout(function(){  document.getElementById("guestForm").submit()}, 3000)
 }
 
 function removeCookies() {

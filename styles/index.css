@@ -26,7 +26,15 @@ body, html{
     font-size: 13pt;
     position: sticky;
     display: flex;
-    top: 0;
+    align-items: center;
+
+}
+#top-nav-bar p{
+    color: #095e32;
+    margin: 0px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 15px;
 }
 #open-side-bar-button{
     color: #095e32;
@@ -38,15 +46,14 @@ body, html{
 #pnhslogo40px{
     height: 40px;
     width: 40px;
-    margin: 8px 4px 46px -4px;
 }
 #side-nav-bar{
     width: 0%;
     height: 100%;
     position: fixed;
-    top: 48px;
+    top: 0px;
     left: 0px;
-    background-color: black;
+    background-color: white;
     overflow: hidden;
     transition: all 0.5s ease-in;
     -webkit-transition: all 0.25s ease-in;
@@ -61,6 +68,7 @@ body, html{
     margin: 16px 12px;
     z-index: 2;
     transition: all 0.5s;
+    color: #095e32;
 }
 #dim-pane{
     height: 100%;
@@ -76,6 +84,7 @@ body, html{
     text-indent: 50px;
     margin: 0px;
     font-size: 10px;
+    color: #095e32;
 }
 
 .tab-selected{
@@ -90,11 +99,13 @@ body, html{
     text-indent: 40px;
     padding: 10px;
     font-weight: bold;
-    color: white;
+    color: #095e32;
     transition: all 0.3s;
 }
 .tabs{
     transition: all 0.5s;
+    display: none;
+    z-index: 3;
 }
 .forms-banner{
 
@@ -341,6 +352,12 @@ label svg{
     background-color: white;
     animation-duration: 1s;
     animation-fill-mode: forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.3s;
   }
   
   .animateExpand{
@@ -350,9 +367,14 @@ label svg{
   @keyframes expand {
         0% {
             height: 0;
+            visibility: hidden;
+            color: #095e3200;
         }
         100% {
             height: 100%;
+            visibility: visible;
+            color: #095e32;
+            padding-top: 150px;
         }
     }
 .animateCenter{
@@ -363,7 +385,7 @@ label svg{
     transform: translate(-50%, -50%);
     color: #0B8043;
     transition: 0.3s;
-    animation-duration: 1s;
+    animation-duration: 2s;
     animation-fill-mode: forwards;
   }
   
@@ -372,12 +394,22 @@ label svg{
         transform: translate(-50%, -100%);
         opacity: 10%;
     }
-    100% {
+    50% {
         position: fixed;
         top: 50%;
         transform: translate(-50%, -50%);
         color: #0B8043;
     }
+    85%{
+        transform: translate(-50%, -100%);
+    }
+    95%{
+        transform: translate(-60%, -100%);
+    }
+    100%{
+        transform: translate(-50%, -100%);
+    }
+
     
 }
 .alert{
@@ -390,15 +422,34 @@ label svg{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 50px;
+    height: 60px;
     width: 100%;
     bottom: 0px;
+    background-color: white;
+    -webkit-box-shadow: 0px -14px 100px 71px rgba(11,128,67,0.38);
+    -moz-box-shadow: 0px -14px 100px 71px rgba(11,128,67,0.38);
+    box-shadow: 0px -14px 100px 71px rgba(11,128,67,0.38);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow:hidden;
 }
 #bottom-nav-bar a{
+    transition: all 0.3s;
     color: #28a745;
     text-align: center;
     width: 100%;
     height: 50px;
     font-size: 25px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
     align-items: center;
+}
+#bottom-nav-bar a p{
+    font-size: 10px;
+    margin: 0px;
+    text-decoration: none;
+}
+#Home{
+    display: block;
 }
