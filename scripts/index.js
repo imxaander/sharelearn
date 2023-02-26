@@ -158,3 +158,10 @@ function selectRole(role) {
   setTimeout(function(){  document.getElementById("guestForm").submit()}, 1000)
 
 }
+
+function removeCookies() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '../php/testRefresh.php', true);
+  xhr.send();
+  location.reload();
+}

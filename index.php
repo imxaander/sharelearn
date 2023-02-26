@@ -23,21 +23,22 @@
         <?php
         if (isset($_COOKIE["device_id"])) {
             $device_id = $_COOKIE["device_id"];
-
-            displayAlerts();
             
+            displayAlerts();
+
         ?>
             <!-- Dim Panel -->
         <div id="dim-pane" onclick="closeFromDim()"></div>
 
-        <!-- Top Bar-->
+        <!-- Top Bar
         <div id="top-bar">
             <p id="top-text-header" onclick="colOrex()">PARAÑAQUE NATIONAL HIGH SCHOOL - MAIN - Home of the Gentle Warriors</p>
         </div>
+        -->
 
         <!-- Top Navigation Bar -->
         <div id="top-nav-bar">
-            <i class="fas fa-bars" aria-hidden="true" id="open-side-bar-button" onclick="openSideBar()"></i>
+            <a class="fas fa-bars" aria-hidden="true" id="open-side-bar-button" onclick="openSideBar()"><i class="fa-solid fa-ellipsis-vertical"></i></a>
             <img src="img/pnhs_logo_255px.jpg" id="pnhslogo40px">
         </div>
 
@@ -55,7 +56,20 @@
             <a href="">Login</a>
             <p>For Researchers Only!</p>
         </div>
-
+            <br>
+        <button onclick="removeCookies()"class="forms-next-button">Tester? Remove Cookies</button>
+        <button href="access.php" class="forms-next-button">Login / Register</button>
+        <!-- Bottom Navigation Bar -->
+        <div id="bottom-nav-bar">
+        <a href="#" onclick="closeSideBar(); openTab(event, 'Home')" class="tablinks tab-selected"><i class="fa-solid fa-house"></i></a>
+            <a href="#" onclick="closeSideBar(); openTab(event, 'Upload')" class="tablinks"><i class="fa-solid fa-file-arrow-up"></i></a>
+            <a href="#" onclick="closeSideBar(); openTab(event, 'Download')" class="tablinks"><i class="fa-solid fa-file-arrow-down"></i></a>
+            <a href="#" onclick="closeSideBar(); openTab(event, 'Files')" class="tablinks"><i class="fa-solid fa-file"></i></a>
+            <!-- terms and conditions
+            <a href="#" onclick="closeSideBar(); openTab(event, 'Terms-and-Conditions')" class="tablinks">Terms and Conditions</a>
+            -->
+        </div>
+        
         <?php
         }else{?>
         <div class="white-background"></div>
