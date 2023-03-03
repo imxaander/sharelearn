@@ -48,7 +48,7 @@
             <br><br>
             <a href=""></a>
             <br><br><br><br><br><br>
-            <a href="">Login</a>
+            <a href="/access.php">Login</a>
             <p>Have an account?</p>
             <a href="">Register</a>
             <p>Don't have an account yet?</p>
@@ -71,7 +71,7 @@
             <button onclick="removeCookies()"class="forms-next-button">Tester? Remove Cookies</button>
             <br>
             <br>
-            <button href="access.php" class="forms-next-button">Login / Register</button>
+            <a href="access.php" class="forms-next-button">Login / Register</a>
         </div>
 
         <div id="Upload" class="tabs">
@@ -111,7 +111,8 @@
             <input type="text" name="role" id="role-input">
         </form>
         <?php
-        }?>
+        }
+        ?>
 
         <script src="libs/js/jquery.js"></script>
         <script src="libs/js/popper.min.js" crossorigin="anonymous"></script>
