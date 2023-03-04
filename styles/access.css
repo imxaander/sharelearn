@@ -63,3 +63,18 @@ body{
     margin-bottom: 10px;
     border-radius: 25px;
 }
+.forms-next-button{
+    width: 100%;
+    margin: auto;
+    margin-left: 0%;
+    margin-top: 10px;
+}
+
+.green{
+    color:#0B8043;
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    text-decoration: underline;
+}

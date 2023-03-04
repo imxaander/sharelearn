@@ -52,6 +52,8 @@ var gsList  = ["TVL ALLEN",
 function initiateGS(){
 
 }
-
+function continueAsGuest(){
+    window.history.back()
+  }
 
 console.log("access.js");

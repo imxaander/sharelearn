@@ -29,40 +29,50 @@
                 <div id="action-select-access" class="forms-lr">
                     <button class="forms-next-button" onclick="openLog()">Login</button>
                     <button class="forms-next-button" onclick="openSign()">Register</button>
+                    <a href="#" class="green" onclick="continueAsGuest()">Continue as Guest</a>
                 </div>
-            <div id="login-form"  class="form-group forms-lr">
-                <p class="back-button" onclick="goBack()">‹</p>
-                <form action="php/login.php" method="post">
-                </form>
-            </div>
-            <div id="register-form" action="php/register.php" method="post" class="form-group forms-lr">
-                <p class="back-button" onclick="goBack()">‹</p>
-                <br>
-                <h3><b>Sign Up </b></h3>
-                <br>
-                <form action="php/register.php" method="post">
-                    <p class="control-labels">Username</p>
-                    <input type="text" class="form-control" name="username" placeholder="Enter username">
-                    <p class="control-labels">Email</p>
-                    <input type="text" class="form-control" name="email" placeholder="Enter email">
-                    <p class="control-labels">Password</p>
-                    <input type="text" class="form-control" name="password"  placeholder="Enter password">
-                    <p class="control-labels">Role</p>
-                    <select class="form-control" name="role">
-                        <option <?php echo ($row["role"] == 'student') ? "selected" : ''; ?> value="student">Student</option>
-                        <option <?php echo ($row["role"] == 'teacher') ? "selected" : ''; ?> value="teacher">Teacher</option>
-                    </select>
-                    <p class="control-labels">Grade and Section</p>
-                    <select name="grade_section" id="" class="form-control">
-                        <option value="TVL - ALLEN">TVL - ALLEN</option>
-                        <option value="TVL - DELL">TVL - DELL</option>
-                    </select>
-
-                    <input type="text" name="device_id" disabled value="<?php echo $row["device_id"]?>" hidden>
+                <div id="login-form"  class="form-group forms-lr">
+                    <p class="back-button" onclick="goBack()">‹</p>
                     <br>
-                    <button class="forms-next-button" type="submit">Register</button>
-                </form>
-            </div>
+                    <h3><b>Login</b></h3>
+                    <br>
+                    <form action="php/login.php" method="post">
+                        <p class="control-labels">Username</p>
+                        <input type="text" class="form-control" name="username" placeholder="Enter username">
+                        <p class="control-labels">Password</p>
+                        <input type="password" class="form-control" name="username" placeholder="Enter password">
+                        <br>
+                        <button class="forms-next-button" type="submit">Login</button>
+                    </form>
+                </div>
+                <div id="register-form" action="php/register.php" method="post" class="form-group forms-lr">
+                    <p class="back-button" onclick="goBack()">‹</p>
+                    <br>
+                    <h3><b>Sign Up </b></h3>
+                    <br>
+                    <form action="php/register.php" method="post">
+                        <p class="control-labels">Username</p>
+                        <input type="text" class="form-control" name="username" placeholder="Enter username">
+                        <p class="control-labels">Email</p>
+                        <input type="text" class="form-control" name="email" placeholder="Enter email">
+                        <p class="control-labels">Password</p>
+                        <input type="text" class="form-control" name="password"  placeholder="Enter password">
+                        <p class="control-labels">Role</p>
+                        <select class="form-control" name="role">
+                            <option <?php echo ($row["role"] == 'student') ? "selected" : ''; ?> value="student">Student</option>
+                            <option <?php echo ($row["role"] == 'teacher') ? "selected" : ''; ?> value="teacher">Teacher</option>
+                        </select>
+                        <p class="control-labels">Grade and Section</p>
+                        <select name="grade_section" id="" class="form-control">
+                            <option value="TVL - ALLEN">TVL - ALLEN</option>
+                            <option value="TVL - DELL">TVL - DELL</option>
+                        </select>
+
+                        <input type="text" name="device_id" disabled value="<?php echo $row["device_id"]?>" hidden>
+                        <br>
+                        <button class="forms-next-button" type="submit">Sign up</button>
+                    </form>
+                </div>
             </div>
             
         </div>

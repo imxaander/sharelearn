@@ -164,3 +164,4 @@ function removeCookies() {
   xhr.send();
   location.reload();
 }
+
