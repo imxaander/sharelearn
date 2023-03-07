@@ -20,12 +20,10 @@
       div.className = "added-item-uploads";
       let icon = getIconForUpload(files[i].name.split(".").pop());
       let fname = shortenFilename(files[i].name, 30);
-      div.innerHTML = `<i class="fa-solid fa-file${icon} added-item-icon"></i><p class="file-name-uploads">${fname}</p> <a href="#" class="removeBtn" >&#10006</a>`;
-
-      console.log();
+      div.innerHTML = `<i class="fa-solid fa-file${icon} added-item-icon"></i><p class="file-name-uploads">${fname}</p> <a href="#" class="removeBtn" data-name="${files[i].name}" >&#10006</a>`;
       fileList.appendChild(div);
       selectedFiles.push(files[i]);
-      console.log(selectedFiles);
+
     }
 
     // add event listeners to remove buttons
@@ -35,19 +33,25 @@
 
   // function to remove file from list and array
   function removeFileFromList(event) {
-  const index = selectedFiles.indexOf(event.target.parentElement.firstChild.textContent);
+
+  const index = selectedFiles.findIndex(file => file.name === event.target.parentElement.lastChild.getAttribute('data-name'));
+  //selectedFiles.indexOf(String(event.target.parentElement.lastChild.getAttribute('data-name')));
+  let name = event.target.parentElement.lastChild.getAttribute('data-name')
+  var fileInput = document.getElementById('fileInput');
+    fileInput.value = "";
   if (index !== -1) {
       selectedFiles.splice(index, 1);
   }
   event.target.parentElement.remove();
+
   }
+
 
   // function to upload selected files
   function uploadFiles() {
     let form = new FormData();
     for (let i = 0; i < selectedFiles.length; i++) {
         form.append('file[]', selectedFiles[i]);
-        toast(`Uploading ${selectedFiles[i].name}`);
     }
 
   // submit form data to server
@@ -55,14 +59,18 @@
   fetch('php/testUpload.php', {
       method: 'POST',
       body: form
-  }).then(response => {
-      // clear file list and array
-      fileList.innerHTML = '';
-      toast("Uploaded!");
-      selectedFiles = [];
-  }).catch(error => {
-      console.error('Error uploading file(s):', error);
-  });
+  }).then(function(response) {
+    if (response.status >= 200 && response.status < 300) {
+        return response.text()
+    }
+        throw new Error(response.statusText)
+    })
+    .then(function(response) {
+        // clear file list and array
+        fileList.innerHTML = '';
+        toast(response);
+        selectedFiles = [];
+    })
   }
   function shortenFilename(filename, maxLength) {
     let extension = filename.split('.').pop(); // get the extension of the filename

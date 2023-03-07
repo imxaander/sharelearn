@@ -17,7 +17,7 @@ if (isset($_POST["role"])){// if there's a role
     $guest_role =$_POST["role"]; //role, we passed from index.php
     $device_id = $uniqueIdGeneration; // cookie that we set earler
     $date_created = date("Y-m-d H:i:s"); //date of creation, date now in this format ig?
-    
+    setcookie("guest_id",$guest_id, $cookieExpiration, "/");//settings the guest id cookie for accessibility in database
     #create query for guest creation
     $sql = "INSERT INTO guests VALUES('$guest_id', '$guest_role', '$device_id', '$date_created')";//query for insertion
     $result = mysqli_query($con, $sql);

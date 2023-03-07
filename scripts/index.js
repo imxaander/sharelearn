@@ -69,9 +69,14 @@ function toast(message){
   Toastify({
 
     text: message,
-    gravity: "bottom", // `top` or `bottom`
+    gravity: "top", // `top` or `bottom`
     position: "center", // `left`, `center` or `right`
     duration: 3000,
+    offset: {
+      x: 0, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+      y: 70 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+    },
+    close: true,
     style: {
       background: "#0B8043",
     },

@@ -56,8 +56,8 @@
                 $file_name = $file_code . "_" .  basename($_FILES["file"]["name"]);
                 $date_expiration = date('Y-m-d H:i:s', strtotime($uploaded_date .' + '. $file_expiration));
                 $file_security = 'private';
-                    
-                $sql = "INSERT INTO files VALUES('', '$file_code', '$guest_id', '$file_name', '$date_expiration', 'private', '$uploaded_date')";
+                
+                $sql = "INSERT INTO files VALUES('', '$file_code', '$guest_id', '$file_name', '$date_expiration', 'private', '$uploaded_date', '')";
                 $result = mysqli_query($con, $sql);
                 if ($result) {
                     addLog("Upload", "$file_code ", time(), format_speed(measure_upload_speed($_FILES["file"])), "$guest_id");

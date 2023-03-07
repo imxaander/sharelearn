@@ -1,6 +1,8 @@
 <?php
 include "connection.php";
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 date_default_timezone_set('Asia/Manila');
 function generateRandomString($length) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -82,7 +84,6 @@ function format_speed($speed) {
         return round($speed / 1073741824, 2) . ' GB/s';
     }
 }
-
 function displayLogs($type, $arg){
     global $con;
     if(isset($type)){
