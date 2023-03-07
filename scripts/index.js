@@ -51,6 +51,7 @@ function openTab(evt, tabName) {
     }
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " tab-selected";
+    document.getElementById("tab-title").innerHTML = tabName;
 }
 
 function uploadLoading() {
@@ -64,6 +65,18 @@ function copyThisText(text) {
 }
 
 
+function toast(message){
+  Toastify({
+
+    text: message,
+    gravity: "bottom", // `top` or `bottom`
+    position: "center", // `left`, `center` or `right`
+    duration: 3000,
+    style: {
+      background: "#0B8043",
+    },
+    }).showToast();
+}
 
 //jquery
 
@@ -165,3 +178,4 @@ function removeCookies() {
   location.reload();
 }
 
+  

@@ -242,7 +242,7 @@
             <?php
                     }else{
             ?>
-                <!-- Action Type Selection -->
+                <!-- Action Type Selection --> 
                 <form action="index.php" method="post">
                     <input type="text" name="user-type" value="<?php echo $_POST["user-type"]; ?>" hidden>
                     <div id="action-selection">
@@ -418,7 +418,7 @@
                             <td>
                                 <?php echo date("M j, Y g:i a", strtotime($row["uploaded_date"]));   ?>
                             </td>
-                            <td onclick="copyThisText('<?php echo $row["file_code"]?>')" >
+                            <td onclick="copyThisText('<?php echo $row["file_code"]?>')">
                                 <p class="code-copy"><?php echo $row["file_code"]?></p>
                             </td>
                         </tr>

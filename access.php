@@ -1,6 +1,7 @@
 <?php
+    session_start();
     include 'php/connection.php';
-    
+    include 'php/functions.php';
     $device_id = $_COOKIE["device_id"];
     //fetch guest id, role,  from device_id
     $sql = "SELECT * FROM guests WHERE device_id ='$device_id'";
@@ -26,6 +27,7 @@
         <p id="backdrop-text">ShareLearn.</p>
         <div id="forms-wrapper">
             <div id="forms-lr">
+                <?php displayAlerts(); ?>
                 <div id="action-select-access" class="forms-lr">
                     <button class="forms-next-button" onclick="openLog()">Login</button>
                     <button class="forms-next-button" onclick="openSign()">Register</button>
@@ -37,10 +39,10 @@
                     <h3><b>Login</b></h3>
                     <br>
                     <form action="php/login.php" method="post">
-                        <p class="control-labels">Username</p>
-                        <input type="text" class="form-control" name="username" placeholder="Enter username">
+                        <p class="control-labels">Email</p>
+                        <input type="email" class="form-control" name="email" placeholder="Enter username">
                         <p class="control-labels">Password</p>
-                        <input type="password" class="form-control" name="username" placeholder="Enter password">
+                        <input type="password" class="form-control" name="password" placeholder="Enter password">
                         <br>
                         <button class="forms-next-button" type="submit">Login</button>
                     </form>
@@ -52,11 +54,11 @@
                     <br>
                     <form action="php/register.php" method="post">
                         <p class="control-labels">Username</p>
-                        <input type="text" class="form-control" name="username" placeholder="Enter username">
+                        <input type="text" class="form-control" name="username" placeholder="Enter username" required>
                         <p class="control-labels">Email</p>
-                        <input type="text" class="form-control" name="email" placeholder="Enter email">
+                        <input type="email" class="form-control" name="email" placeholder="Enter email" required>
                         <p class="control-labels">Password</p>
-                        <input type="text" class="form-control" name="password"  placeholder="Enter password">
+                        <input type="password" class="form-control" name="password"  placeholder="Enter password" required>
                         <p class="control-labels">Role</p>
                         <select class="form-control" name="role">
                             <option <?php echo ($row["role"] == 'student') ? "selected" : ''; ?> value="student">Student</option>
@@ -68,7 +70,7 @@
                             <option value="TVL - DELL">TVL - DELL</option>
                         </select>
 
-                        <input type="text" name="device_id" disabled value="<?php echo $row["device_id"]?>" hidden>
+                        <input type="text" name="device_id" value="<?php echo $row["device_id"]?>" hidden>
                         <br>
                         <button class="forms-next-button" type="submit">Sign up</button>
                     </form>
