@@ -68,7 +68,7 @@
     .then(function(response) {
         // clear file list and array
         fileList.innerHTML = '';
-        toast(response);
+        toast(response, "center", "top");
         selectedFiles = [];
     })
   }

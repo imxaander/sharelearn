@@ -4,8 +4,7 @@
 
     session_start();
     ?>
-<!DOCTYPE html>
-<html lang="en">
+<html lang="">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="libs/css/bootstrap.css">
@@ -16,6 +15,7 @@
         <link rel="stylesheet" href="libs/toastify/toastify.css">
         <script defer src="libs/fontawesome 6/js/all.js"></script>
         <script src="scripts/index.js" defer></script>
+        <script src="scripts/search.js" defer></script>
         <script src="libs/chartjs/dist/chart.umd.js"></script>
         <script src="libs/toastify/toastify.js"></script>
 
@@ -56,9 +56,9 @@
                 <p>Have an account?</p>
                 <a href="">Register</a>
                 <p>Don't have an account yet?</p>
+                <a href="#" onclick="removeCookies()">Remove Cookies</a>
             <?php   
             }else{
-                
             ?>
                 <a href="/php/logout.php">Logout</a>
                 <p>Exit your account</p>
@@ -102,8 +102,16 @@
         </div>
 
         <div id="Download" class="tabs">
-            <p class="tabs-headers">Download</p>
+            <div id="download-container">
+                <div id="download-wrapper">
+                    <p class="tabs-headers">File Code</p>
+                    <input type="text" id="file-code-search-input" class="form-control" maxlength="14">
+                </div>
+                
+                <button class="full-width-button" onclick="searchFile()"><i class="fas fa-search"></i></button>
 
+                <div id="download-footer"></div>
+            </div>
         </div>
 
         <div id="Files" class="tabs">

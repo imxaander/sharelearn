@@ -47,7 +47,7 @@ if(isset($_FILES['file'])){
                 $upload_speed = format_speed(measure_upload_speed($_FILES["file"]));
                 
                 $sql = "INSERT INTO files VALUES('', '$file_code', '$guest_id', '$user_id', '$file_name_local', '$file_expiration', '$file_security', '$uploaded_date', '$file_size', '$upload_speed')";
-                echo $sql;
+
                 $result = mysqli_query($con, $sql);
                 if ($result) {
                     echo "File $file_name is uploaded successfully.";

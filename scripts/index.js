@@ -65,12 +65,12 @@ function copyThisText(text) {
 }
 
 
-function toast(message){
+function toast(message, position, gravity){
   Toastify({
 
     text: message,
-    gravity: "top", // `top` or `bottom`
-    position: "center", // `left`, `center` or `right`
+    gravity: gravity, // `top` or `bottom`
+    position: position, // `left`, `center` or `right`
     duration: 3000,
     offset: {
       x: 0, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
@@ -90,7 +90,7 @@ $('#upload-button').on("click",()=>{
         document.getElementById('upload-file').style.display = "none";
         document.getElementById('upload-loading').style.display = "block";
     }else{
-        console.log("hello");
+
     }
 })
 
@@ -129,7 +129,7 @@ $.ajax({
       backgroundColors.push(getRandomColor());
       hoverBackgroundColors.push(getRandomColor());
     }
-    console.log(labels)
+    /*
     // create the pie chart
     var ctx = document.getElementById('myPieChart').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -146,9 +146,12 @@ $.ajax({
         responsive: true
       }
     });
+    */
+
+
   },
   error: function(xhr, status, error) {
-    console.log(error);
+    //console.log(error);
   }
 });
 
@@ -170,7 +173,6 @@ function selectRole(role) {
   var element = document.getElementById(icon)
   element.classList.add('animateCenter')
 
-  console.log(role);
   var roleInput = document.getElementById("role-input")
   roleInput.value = role
   setTimeout(function(){  document.getElementById("guestForm").submit()}, 3000)
@@ -183,4 +185,3 @@ function removeCookies() {
   location.reload();
 }
 
-  
