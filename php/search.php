@@ -10,9 +10,9 @@
         $sql = "SELECT * FROM files WHERE file_code = '$file_code'";
         $result = mysqli_query($con, $sql);
 
-        if(mysqli_num_rows($result) > 0){
-            
-            echo "File found!";
+        if(mysqli_num_rows($result) > 0){?>
+
+        <?
         }else{ 
             echo "No file associated with code.";
         }
