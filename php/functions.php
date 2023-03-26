@@ -75,13 +75,13 @@ function measure_upload_speed($file) {
 
 function format_speed($speed) {
     if ($speed < 1024) {
-        return $speed . ' B/s';
+        return $speed . ' B';
     } else if ($speed < 1048576) {
-        return round($speed / 1024, 2) . ' KB/s';
+        return round($speed / 1024, 2) . ' KB';
     } else if ($speed < 1073741824) {
-        return round($speed / 1048576, 2) . ' MB/s';
+        return round($speed / 1048576, 2) . ' MB';
     } else {
-        return round($speed / 1073741824, 2) . ' GB/s';
+        return round($speed / 1073741824, 2) . ' GB';
     }
 }
 function displayLogs($type, $arg){

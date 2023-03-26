@@ -96,7 +96,7 @@
                             <input type="file" id="fileInput" name="file[]">
                             <i class="fa-solid fa-plus"></i>
                     </label>
-                    <button id="uploadBtn"><i class="fa-solid fa-share"></i></button>
+                    <button id="uploadBtn"><i class="fa-solid fa-share-from-square"></i></i></button>
                 </div>
             </div>
         </div>
@@ -104,11 +104,10 @@
         <div id="Download" class="tabs">
             <div id="download-container">
                 <div id="download-wrapper">
-                    <p class="tabs-headers">File Code</p>
-                    <input type="text" id="file-code-search-input" class="form-control" maxlength="14">
+                    <input type="text" placeholder="Enter File Code.." id="file-code-search-input" class="form-control" maxlength="14">
                 </div>
                 
-                <button class="full-width-button" onclick="searchFile()"><i class="fas fa-search"></i></button>
+                <p class="full-width-button" onclick="searchFile()"><i class="fas fa-search"></i></p>
 
                 <div id="download-footer"></div>
             </div>

@@ -10,14 +10,18 @@
         $sql = "SELECT * FROM files WHERE file_code = '$file_code'";
         $result = mysqli_query($con, $sql);
 
-        if(mysqli_num_rows($result) > 0){?>
-
-        <?
+        if(mysqli_num_rows($result) > 0){
+            $row = mysqli_fetch_assoc($result)?>
+                <p id="file-name-preview"><?php echo substr($row["file_name"], 15)?></p>
+                <p><i class="fa-solid fa-hard-drive"></i> <?php echo format_speed($row["file_size"])?> </p>
+                <p><i class="fa-solid fa-clock"></i> <?php echo date("M jS, Y - H:i a", strtotime($row["uploaded_date"]))?> </p>
+                <p id="downloadBtn">Download</p>                
+        <?php
         }else{ 
-            echo "No file associated with code.";
+            echo "no file";
         }
     }else{
-        echo "No code entered.";
+        echo "no code";
         echo $_POST["file_code"];
     }
 ?>
