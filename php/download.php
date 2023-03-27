@@ -22,7 +22,7 @@
                 if (file_exists($file)) {
                     header('Content-Description: File Transfer');
                     header('Content-Type: application/octet-stream');
-                    header('Content-Disposition: attachment; filename="'.substr(basename($file), 10).'"');
+                    header('Content-Disposition: attachment; filename="'.substr(basename($file), 15).'"');
                     header('Expires: 0');
                     header('Cache-Control: must-revalidate');
                     header('Pragma: public');
@@ -33,21 +33,28 @@
                     $details = "$file_code";
                     $timestamp = time();
                     $duration = measure_download_speed($file);
-                    $guest_id = $_POST["guest-id"];
-                    addLog($type, $details, $timestamp, $duration, $guest_id);
+
+                    $user_id = "";
+                    $guest_id ="";
+                    //user variables
+                    if (isset($_SESSION["loggedIn"])) {
+                        $user_id = $_SESSION["user_id"];
+                    }else{
+                        $guest_id = $_COOKIE["guest_id"];
+                    }
+                    addLog($type, $details, $timestamp, $duration, $user_id, $guest_id);
                     exit();
                 }else{
-                    echo $file;
-                    echo getcwd();
+                    echo "file not exists in the drive.";
                 }
             }else{
-                header("Location: ../?error=File Expired");
+                echo "file expired";
             }
         }else{
             echo "THERE IS NO result E ";
             echo $sql;
         }
     }else{
-        header("Location: ../");
+        echo "no code";
     }
 ?>

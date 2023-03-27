@@ -14,10 +14,10 @@ function generateRandomString($length) {
     return $randomString;
 }
 
-function addLog($type, $details, $timestamp, $duration, $user){
+function addLog($type, $details, $timestamp, $duration, $guest, $user){
     global $con;
     $logId = "LOG" .  strtoupper(generateRandomString(5));
-    $sql = "INSERT INTO logs VALUES('$logId','$type', '$details', '$timestamp', '$duration', '$user')";
+    $sql = "INSERT INTO logs VALUES('$logId','$type', '$details', '$timestamp', '$duration', '$guest', '$user')";
     $result = mysqli_query($con, $sql);
 
     if($result){

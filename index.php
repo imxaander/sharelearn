@@ -145,6 +145,7 @@
         <?php
         }
         ?>
+        <script src="scripts/download.js"></script>
         <script src="scripts/upload.js"></script>
         <script src="libs/js/jquery.js"></script>
         <script src="libs/js/popper.min.js" crossorigin="anonymous"></script>
