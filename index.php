@@ -3,6 +3,13 @@
     include "php/functions.php";
 
     session_start();
+    if (isset($_SESSION["loggedIn"])) {
+        $user_id = $_SESSION["user_id"];
+        $username = $_SESSION["username"];
+        $email = $_SESSION["email"];
+        $role = $_SESSION["role"];
+        $date_created = $_SESSION["date_created"];
+    }
     ?>
 <html lang="">
     <head>
@@ -51,7 +58,7 @@
             <a href=""></a>
             <br><br><br><br><br><br>
             <?php 
-            if($_SESSION["loggedIn"] != "true"){?>
+            if(isset($_SESSION["loggedIn"]) != "true"){?>
                 <a href="/access.php">Login</a>
                 <p>Have an account?</p>
                 <a href="">Register</a>
@@ -114,8 +121,35 @@
         </div>
 
         <div id="Files" class="tabs">
-            <p class="tabs-headers">Files</p>
+            <p>Status : <?php 
+            if (isset($_SESSION["loggedIn"]) != true) {
+                echo "guest";
+            }else{
+                echo "logged in"; 
+            }
+            ?></p> 
+            <div id="file-list">
+            <?php
 
+            if (isset($_SESSION["loggedIn"]) != true) {
+                $sql ;
+            ?>
+
+            <?php
+            }else{
+                $sql = "SELECT * FROM files WHERE user_id = '$user_id'";
+                $result = mysqli_query($con, $sql);
+
+                while($row = mysqli_fetch_array($result)){?>
+                <div class="files">
+                    <?php echo $row["file_name"]?>
+                </div>
+
+            <?php        
+                }
+            }
+            ?>
+            </div>
         </div>
         
         <?php

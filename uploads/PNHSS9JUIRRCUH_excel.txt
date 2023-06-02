@@ -1,6 +1,0 @@
-how they want to process the data or organize the data, after that i will procced 
-to different ways to intrepreting the data or 
-depending on the what is being requested to me by the company or depeartment. 
-
-common ways to interpret the data are heat mapping, pivot tables, 
-wighted averging and trend spotting

@@ -152,4 +152,6 @@ function displayAlerts(){
         unset($_SESSION["alert_type"]);
     }
 }
+
+
 ?>
