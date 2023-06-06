@@ -153,5 +153,43 @@ function displayAlerts(){
     }
 }
 
+function getIconForUpload($fileformat){
+
+    switch ($fileformat) {
+        case "mp3":
+        case "ogg":
+        case "wav":
+            return "-audio";
+            break;
+        case "docx":
+        case "doc":
+            return "-word";
+            break;
+        case "ppt":
+        case "pptx":
+            return "-powerpoint";
+            break;
+        case "xlsx":
+        case "xlsm":
+        case "xlsb":
+        case "xltm":
+        case "xltm":
+            return "-excel";
+            break;
+        case "gif":
+        case "png":
+        case "jpg":
+        case "jpeg":
+        case "jfif":
+            return "-image";
+            break;
+        case "pdf":
+            return "-image";
+            break;
+        default:
+            return "";
+            break;
+    }
+}
 
 ?>

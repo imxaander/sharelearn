@@ -121,13 +121,6 @@
         </div>
 
         <div id="Files" class="tabs">
-            <p>Status : <?php 
-            if (isset($_SESSION["loggedIn"]) != true) {
-                echo "guest";
-            }else{
-                echo "logged in"; 
-            }
-            ?></p> 
             <div id="file-list">
             <?php
 
@@ -141,14 +134,22 @@
                 $result = mysqli_query($con, $sql);
 
                 while($row = mysqli_fetch_array($result)){?>
-                <div class="files">
-                    <?php echo $row["file_name"]?>
+                <div class="uploaded-files">
+                    <i class="uploaded-file-icon fa-solid fa-file<?php echo getIconForUpload(pathinfo($row["file_name"], PATHINFO_EXTENSION))?>">
+                    </i>
+                    <p class="uploaded-file-name">
+                        <?php echo substr($row["file_name"], 15)?>
+                    </p>
+                    <i class="fa-solid fa-ellipsis-vertical uploaded-file-edit-icon"></i>
                 </div>
-
+                
             <?php        
                 }
             }
             ?>
+            </div>
+            <div id="uploaded-file-edit">
+            <i class="fa fa-close" id="uploaded-file-edit-close-button"></i>
             </div>
         </div>
         
