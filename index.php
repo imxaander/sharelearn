@@ -140,16 +140,21 @@
                     <p class="uploaded-file-name">
                         <?php echo substr($row["file_name"], 15)?>
                     </p>
-                    <i class="fa-solid fa-ellipsis-vertical uploaded-file-edit-icon"></i>
+                    
+                    <i class="fa-solid fa-ellipsis-vertical uploaded-file-edit-icon" onclick='openEditWindow("<?php echo $row["file_code"]?>")'></i>
                 </div>
                 
+                <div class="uploaded-file-edit" id="<?php echo $row["file_code"] ?>">
+                    <i class="fa fa-close uploaded-file-edit-close-button" onclick='closeEditWindow("<?php echo $row["file_code"] ?>")'>
+                    </i>
+                    <br><br>
+                    <p>ID: <?php echo $row["file_code"]?></p>
+                    <input type="text">
+                </div>
             <?php        
                 }
             }
             ?>
-            </div>
-            <div id="uploaded-file-edit">
-            <i class="fa fa-close" id="uploaded-file-edit-close-button"></i>
             </div>
         </div>
         
@@ -180,6 +185,7 @@
         <?php
         }
         ?>
+        <script src="scripts/onclickevents.js"></script>
         <script src="scripts/download.js"></script>
         <script src="scripts/upload.js"></script>
         <script src="libs/js/jquery.js"></script>

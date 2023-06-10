@@ -184,7 +184,7 @@ function getIconForUpload($fileformat){
             return "-image";
             break;
         case "pdf":
-            return "-image";
+            return "-pdf";
             break;
         default:
             return "";
