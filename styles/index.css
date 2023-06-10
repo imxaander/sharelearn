@@ -617,16 +617,16 @@ box-shadow: 4px 9px 123px -30px rgba(0,0,0,0.75);
     margin-left: 10px;
 }
 .uploaded-file-icon{
-    font-size: 40px;
+    font-size: 30px;
     color:#28a745;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 .uploaded-file-edit-icon{
     font-size: 20px;
     margin-top: 15;
     color:#28a745;
 }
-#uploaded-file-edit{
+.uploaded-file-edit{
     background-color: white;
     border-radius: 15px;
     width: 300px;
@@ -636,10 +636,12 @@ box-shadow: 4px 9px 123px -30px rgba(0,0,0,0.75);
     top:50%;
     transform: translate(-50%, -50%);
     border: solid 1px #0B8043;
+    display: none;
+    padding: 20px;
 }
-#uploaded-file-edit-close-button{
+.uploaded-file-edit-close-button{
     font-size: 24px;
-    margin: 15px;
     float: right;
     color: rgb(177, 114, 102);
+    display: inline;
 }
