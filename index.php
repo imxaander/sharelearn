@@ -25,7 +25,7 @@
         <script src="scripts/search.js" defer></script>
         <script src="libs/chartjs/dist/chart.umd.js"></script>
         <script src="libs/toastify/toastify.js"></script>
-
+        <script src="libs/qrcodejs/qrcode.js"></script>
         <title>ShareLearn - Paranaque National Highschool - Main</title>
     </head>
     <body>
@@ -38,7 +38,7 @@
 
         ?>
             <!-- Dim Panel -->
-
+            <div id="dim-pane" onclick="closeFromDim()"></div>
         <!-- Top Bar
         <div id="top-bar">
             <p id="top-text-header" onclick="colOrex()">PARAÑAQUE NATIONAL HIGH SCHOOL - MAIN - Home of the Gentle Warriors</p>
@@ -91,6 +91,7 @@
             <p class="tabs-headers">Good Morning</p>
             <div id="storage-use-overview">
             </div>
+            <?php displayLogs()?>
         </div>
 
         <div id="Upload" class="tabs">
@@ -147,9 +148,49 @@
                 <div class="uploaded-file-edit" id="<?php echo $row["file_code"] ?>">
                     <i class="fa fa-close uploaded-file-edit-close-button" onclick='closeEditWindow("<?php echo $row["file_code"] ?>")'>
                     </i>
-                    <br><br>
-                    <p>ID: <?php echo $row["file_code"]?></p>
-                    <input type="text">
+                    <br>
+                    <p class="edit-file-name" name=""><b>Name: </b><input type="text" value="<?php echo $row["file_name"]?>"></p>
+                    <p class="edit-file-id"><b>ID:</b> <?php echo $row["file_code"]?> <i class="fa-solid fa-copy edit-file-id-copy-icon" onclick="copyText('<?php echo $row['file_code']?>')"></i> </p>
+                    <p><b>Security :</b>  
+                        <select id="edit-file-security">
+                            <option 
+                                value="private" 
+                                <?php if ($row["file_security"] == "private") {
+                                    echo "selected";
+                                }?>
+                            >Private</option>
+                            <option value="public"
+                                <?php if ($row["file_security"] == "public") {
+                                    echo "selected";
+                                }?>
+                            >Public</option>
+                        </select>
+                    </p>
+                    <p><b>Availability :</b>  
+                        <select id="edit-file-expiration">
+                            <option 
+                                value="available" 
+                                <?php if ($row["file_expiration"] == "available") {
+                                    echo "selected";
+                                }?>
+                            >Available</option>
+                            <option value="unavailable"
+                                <?php if ($row["file_security"] == "unavailable") {
+                                    echo "selected";
+                                }?>
+                            >Unavailable</option>
+                        </select>
+                    </p>
+                    <p><b>Uploaded:</b> <?php echo $row["uploaded_date"]?></p>
+                    <p><b>Size:</b> <?php echo format_speed($row["file_size"]) ?></p>
+                    
+                    
+                    <a class="" href="../?search=<?php echo $row['file_code']?>"><b>Download</b></a>
+                    <p style="margin:0">or</p>
+                    <a class="" href="#" id="generate<?php echo $row['file_code']?>" onclick="createQR('<?php echo $row['file_code']?>')"><b>Show QR code</b></a>
+                    <div class="qrcodes" id="qrcode-<?php echo $row['file_code']?>"></div>
+                    
+
                 </div>
             <?php        
                 }

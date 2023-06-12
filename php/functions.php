@@ -14,14 +14,14 @@ function generateRandomString($length) {
     return $randomString;
 }
 
-function addLog($type, $details, $timestamp, $duration, $guest, $user){
+function addLog($type, $details, $timestamp, $duration, $user, $guest){
     global $con;
     $logId = "LOG" .  strtoupper(generateRandomString(5));
-    $sql = "INSERT INTO logs VALUES('$logId','$type', '$details', '$timestamp', '$duration', '$guest', '$user')";
+    $sql = "INSERT INTO logs VALUES('$logId','$type', '$details', '$timestamp', '$duration', '$user', '$guest')";
     $result = mysqli_query($con, $sql);
 
     if($result){
-        echo "nice";
+        
     }
 }
 
@@ -56,35 +56,35 @@ function measure_download_speed($file_url)
     }
 }
 
-function measure_upload_speed($file) {
+function measure_upload_speed($file_error, $file_name, $file_tmp, $file_size) {
     $start_time = microtime(true);
 
-    if ($file && $file['error'] === UPLOAD_ERR_OK) {
-        $target_file = basename($file['name']);
-        move_uploaded_file($file['tmp_name'], $target_file);
+    if ($file_error === UPLOAD_ERR_OK) {
+        $target_file = "../temp/tmp" . basename($file_name);
+        file_put_contents($target_file, file_get_contents($file_tmp));
+        
     } else {
         return false;
     }
-
+    unlink($target_file);
     $end_time = microtime(true);
     $elapsed_time = $end_time - $start_time;
-    $upload_speed = $file['size'] / $elapsed_time;
+    $upload_speed = $file_size / $elapsed_time;
 
     return $upload_speed;
 }
-
 function format_speed($speed) {
     if ($speed < 1024) {
         return $speed . ' B';
     } else if ($speed < 1048576) {
-        return round($speed / 1024, 2) . ' KB';
+        return round($speed / 1024, 2) . ' KB/s';
     } else if ($speed < 1073741824) {
-        return round($speed / 1048576, 2) . ' MB';
+        return round($speed / 1048576, 2) . ' MB/s';
     } else {
-        return round($speed / 1073741824, 2) . ' GB';
+        return round($speed / 1073741824, 2) . ' GB/s';
     }
 }
-function displayLogs($type, $arg){
+function displayLogs(){
     global $con;
     if(isset($type)){
         $sql = "SELECT * FROM logs WHERE '$type'='$arg' ORDER BY timestamp DESC";
@@ -116,7 +116,7 @@ function displayLogs($type, $arg){
                 
                     <div class="logs-container">
                         <div class="log">
-                                <p><b>  <?php echo $row["user"]?></b> <?php echo $message?>  <b> <?php echo $row["details"]?></b> </p>
+                                <p><b>  <?php echo $row["user_id"] . $row["guest_id"]?></b> <?php echo $message?>  <b> <?php echo $row["details"]?></b> </p>
                                 <p class="log-date"><?php echo $date_string?> - <?php echo $row["duration"]?></p>
                         </div>
                     </div>

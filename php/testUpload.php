@@ -12,7 +12,7 @@ if(isset($_FILES['file'])){
         //for database
         $code_count = 10;
         $file_code = strtoupper('PNHS' . generateRandomString($code_count));
-        $file_expiration = "1 day";
+        $file_expiration = "available";
         $file_security = "private";
         $uploaded_date = Date("Y-m-d H:i:s");
 
@@ -43,11 +43,15 @@ if(isset($_FILES['file'])){
         }
 
         if(empty($errors)==true) {
+            $mFileError = $_FILES["file"]["error"][$key];
+            $mFileName = $_FILES["file"]["name"][$key];
+            $mTempName = $_FILES["file"]["tmp_name"][$key];
+            $mFileSize = $_FILES["file"]["size"][$key];
+            $upload_speed = format_speed(measure_upload_speed($mFileError, $mFileName, $mTempName, $mFileSize));
             if (move_uploaded_file($file_tmp, $target_file)) {
-                $upload_speed = format_speed(measure_upload_speed($_FILES["file"]));
                 
                 $sql = "INSERT INTO files VALUES('', '$file_code', '$guest_id', '$user_id', '$file_name_local', '$file_expiration', '$file_security', '$uploaded_date', '$file_size', '$upload_speed')";
-
+                addLog("Upload", $file_code, time(), $upload_speed, $user_id, $guest_id);
                 $result = mysqli_query($con, $sql);
                 if ($result) {
                     echo "File $file_name is uploaded successfully.";
