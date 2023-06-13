@@ -26,6 +26,7 @@
         <script src="libs/chartjs/dist/chart.umd.js"></script>
         <script src="libs/toastify/toastify.js"></script>
         <script src="libs/qrcodejs/qrcode.js"></script>
+        <script src="libs/htmlscanner/html5-qrcode.min.js"></script>
         <title>ShareLearn - Paranaque National Highschool - Main</title>
     </head>
     <body>
@@ -91,6 +92,7 @@
             <p class="tabs-headers">Good Morning</p>
             <div id="storage-use-overview">
             </div>
+            <div style="width: 300px" id="reader"></div>
             <?php displayLogs()?>
         </div>
 
