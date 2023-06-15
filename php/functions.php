@@ -193,7 +193,7 @@ function getIconForUpload($fileformat){
 }
 
 function greet(){
-    date_default_timezone_set('Asia/Manila'); // Replace 'Your_Timezone' with your desired timezone
+    date_default_timezone_set('Asia/Manila'); 
 
     $currentHour = date('H');
 
@@ -207,4 +207,6 @@ function greet(){
         return "Hello!";
     }
 }
+
+
 ?>

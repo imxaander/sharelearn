@@ -93,13 +93,34 @@
             <p id="welcome-text-home">Hey, <b><?php echo  (isset($_SESSION["loggedIn"])) ?  $_SESSION["username"] : "Guest"; ?> </b></p>
             <p class="tabs-headers"><?php echo greet() ?></p>
             <hr>
-            <div>
-
-            </div>
-            <div id="storage-use-overview">
-            </div>
-            
-            
+            <?php if (isset($_SESSION["loggedIn"])) {
+            ?>
+            <p>You are a <b>REGISTERED USER!. </b>You can use most of the features!</p>
+            <p>Users can:</p>
+            <ul>
+                <li>Upload Files</li>
+                <li>Download Files</li>
+                <li>Copy File Codes</li>
+                <li>Scan File QR Codes</li>
+                <li>Generate File QR Code</li>
+                <li>Edit Files</li>
+            </ul>
+            <?php }else{?>
+            <p>You are only a <b>GUEST. </b><a href="/access.php">Register</a> to get most of the features.</p>
+            <p>Guests can only:</p>
+            <ul>
+                <li>Upload Files</li>
+                <li>Download Files</li>
+                <li>Copy File Codes</li>
+                <li>Scan File QR Codes</li>
+                <strike>
+                    <li>Generate File QR Code</li>
+                    <li>Edit Files</li>
+                </strike>
+            </ul>
+            <?php } ?>
+            <hr>
+            <p>Need help? see <a href="/access.php">Documentation</a>.</p>
         </div>
 
         <div id="Upload" class="tabs">
@@ -177,47 +198,47 @@
                     <i class="fa fa-close uploaded-file-edit-close-button" onclick='closeEditWindow("<?php echo $row["file_code"] ?>")'>
                     </i>
                     <br>
-                    <p class="edit-file-name" name=""><b>Name: </b><input type="text" value="<?php echo $row["file_name"]?>"></p>
-                    <p class="edit-file-id"><b>ID:</b> <?php echo $row["file_code"]?> <i class="fa-solid fa-copy edit-file-id-copy-icon" onclick="copyText('<?php echo $row['file_code']?>')"></i> </p>
-                    <p><b>Security :</b>  
-                        <select id="edit-file-security">
-                            <option 
-                                value="private" 
-                                <?php if ($row["file_security"] == "private") {
-                                    echo "selected";
-                                }?>
-                            >Private</option>
-                            <option value="public"
-                                <?php if ($row["file_security"] == "public") {
-                                    echo "selected";
-                                }?>
-                            >Public</option>
-                        </select>
-                    </p>
-                    <p><b>Availability :</b>  
-                        <select id="edit-file-expiration">
-                            <option 
-                                value="available" 
-                                <?php if ($row["file_expiration"] == "available") {
-                                    echo "selected";
-                                }?>
-                            >Available</option>
-                            <option value="unavailable"
-                                <?php if ($row["file_security"] == "unavailable") {
-                                    echo "selected";
-                                }?>
-                            >Unavailable</option>
-                        </select>
-                    </p>
-                    <p><b>Uploaded:</b> <?php echo $row["uploaded_date"]?></p>
-                    <p><b>Size:</b> <?php echo format_speed($row["file_size"]) ?></p>
-                    
-                    
-                    <a class="" href="../?search=<?php echo $row['file_code']?>"><b>Download</b></a>
-                    <p style="margin:0">or</p>
-                    <a class="" href="#" id="generate<?php echo $row['file_code']?>" onclick="createQR('<?php echo $row['file_code']?>')"><b>Show QR code</b></a>
-                    <div class="qrcodes" id="qrcode-<?php echo $row['file_code']?>"></div>
-                    
+                    <form action="php/editfile.php" method="post">
+                        <button type="submit" name="submit">Save</button>
+                        <p class="edit-file-name" name="name"><b>Name: </b><input type="text" value="<?php echo substr($row["file_name"], 15)?>"></p>
+                        <p class="edit-file-id" name="code"><b>ID:</b> <?php echo $row["file_code"]?> <i class="fa-solid fa-copy edit-file-id-copy-icon" onclick="copyText('<?php echo $row['file_code']?>')"></i> </p>
+                        <p><b>Security :</b>  
+                            <select id="edit-file-security" name="security">
+                                <option 
+                                    value="private" 
+                                    <?php if ($row["file_security"] == "private") {
+                                        echo "selected";
+                                    }?>
+                                >Private</option>
+                                <option value="public"
+                                    <?php if ($row["file_security"] == "public") {
+                                        echo "selected";
+                                    }?>
+                                >Public</option>
+                            </select>
+                        </p>
+                        <p><b>Availability :</b>  
+                            <select id="edit-file-expiration" name="expiration">
+                                <option 
+                                    value="available" 
+                                    <?php if ($row["file_expiration"] == "available") {
+                                        echo "selected";
+                                    }?>
+                                >Available</option>
+                                <option value="unavailable"
+                                    <?php if ($row["file_security"] == "unavailable") {
+                                        echo "selected";
+                                    }?>
+                                >Unavailable</option>
+                            </select>
+                        </p>
+                        <p><b>Uploaded:</b> <?php echo $row["uploaded_date"]?></p>
+                        <p><b>Size:</b> <?php echo format_speed($row["file_size"]) ?></p>
+                        <a class="" href="../?search=<?php echo $row['file_code']?>"><b>Download</b></a>
+                        <p style="margin:0">or</p>
+                        <a class="" href="#" id="generate<?php echo $row['file_code']?>" onclick="createQR('<?php echo $row['file_code']?>')"><b>Show QR code</b></a>
+                        <div class="qrcodes" id="qrcode-<?php echo $row['file_code']?>"></div>
+                    </form>
 
                 </div>
             <?php        
@@ -295,7 +316,6 @@
         ?>
         <div id="reader-wrapper">
             <div style="width: 300px;"  id="reader"></div>
-            <p style="background-color: white;">Sasjdasd</p>
         </div>
         
         <script src="scripts/onclickevents.js"></script>
