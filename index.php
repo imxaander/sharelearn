@@ -72,7 +72,8 @@
             <?php
             }
             ?>
-            <a href="#" onclick="openTab(event, 'TermsConditions')" class="tablinks tab-selected">Terms and Conditions</a>
+            <a href="#" onclick="openTab(event, 'About')" class="tablinks">About</a>
+            <a href="#" onclick="openTab(event, 'TermsConditions')" class="tablinks">Terms and Conditions</a>
         </div>
 
         <!-- Bottom Navigation Bar -->
@@ -93,7 +94,7 @@
             <p class="tabs-headers"><?php echo greet() ?></p>
             <hr>
             <div>
-                
+
             </div>
             <div id="storage-use-overview">
             </div>
@@ -225,7 +226,18 @@
             ?>
             </div>
         </div>
-        
+        <div id="About" class="tabs">
+            <h2 align="center" class="bold"><font color="#0B8043">ShareLearn</font></h2>
+            <p class="bold">A Convenient and Collaborative File Sharing System for PNHS</p>
+
+            <div id="about-desc">
+                <p>ShareLearn is a file sharing system designed to help students and teachers at your school easily and efficiently share files with one another. With ShareLearn, users can upload and download files to a central location within the school's network, making it easy to access important course materials, assignments, and other resources.</p>
+                <p>The system is named ShareLearn because it is intended to facilitate knowledge sharing and collaboration among students and teachers. By providing a centralized platform for file sharing, ShareLearn can help to reduce the time and effort required to manage and distribute course materials, and can help to foster a more collaborative learning environment.</p>
+                <p>In addition to its file sharing capabilities, ShareLearn also includes features such as user authentication, file version control, and access controls, to help ensure the security and integrity of the files being shared.</p>
+                <p>By implementing ShareLearn, your school can provide a more efficient and convenient way for students and teachers to collaborate and share knowledge, and can help to improve the overall learning experience for everyone involved.</p>
+            </div>
+        </div>
+
         <div id="TermsConditions" class="tabs">
             <div id="tac-list">
                 <h4>1. Scope of Services</h4>
@@ -283,6 +295,7 @@
         ?>
         <div id="reader-wrapper">
             <div style="width: 300px;"  id="reader"></div>
+            <p style="background-color: white;">Sasjdasd</p>
         </div>
         
         <script src="scripts/onclickevents.js"></script>

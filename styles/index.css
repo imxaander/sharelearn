@@ -697,7 +697,7 @@ box-shadow: 4px 9px 123px -30px rgba(0,0,0,0.75);
     border-radius: 10px;
     background-color: white;
     padding: 10px;
-
+    
 }
 #reader-wrapper button{
     background-color: #0B8043;
@@ -713,6 +713,10 @@ box-shadow: 4px 9px 123px -30px rgba(0,0,0,0.75);
 #reader-wrapper select{
     border-radius: 10px;
     margin-bottom: 10px;
+}
+#About{
+    overflow: scroll;
+    height: calc(100vh - 150px);
 }
 #TermsConditions{
     overflow: scroll;
