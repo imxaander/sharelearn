@@ -62,9 +62,8 @@
             if(isset($_SESSION["loggedIn"]) != "true"){?>
                 <a href="/access.php">Login</a>
                 <p>Have an account?</p>
-                <a href="">Register</a>
+                <a href="/access.php">Register</a>
                 <p>Don't have an account yet?</p>
-                <a href="#" onclick="removeCookies()">Remove Cookies</a>
             <?php   
             }else{
             ?>
@@ -73,15 +72,17 @@
             <?php
             }
             ?>
-
+            <a href="#" onclick="openTab(event, 'TermsConditions')" class="tablinks tab-selected">Terms and Conditions</a>
         </div>
 
         <!-- Bottom Navigation Bar -->
         <div id="bottom-nav-bar">
             <a href="#" onclick="openTab(event, 'Home')" class="tablinks tab-selected"><i class="fa-solid fa-house"></i><p>Home</p></a>
             <a href="#" onclick="openTab(event, 'Upload')" class="tablinks"><i class="fa-solid fa-upload"></i><p>Upload</p></a>
+            <a href="#" onclick="openReader()"><i class="fa-solid fa-qrcode" id="open-qr"></i></a>
             <a href="#" onclick="openTab(event, 'Download')" class="tablinks"><i class="fa-solid fa-download"></i><p>Download</p></a>
             <a href="#" onclick="openTab(event, 'Files')" class="tablinks"><i class="fa-solid fa-file"></i><p>Files</p></a>
+            
                 <!-- terms and conditions
             <a href="#" onclick="closeSideBar(); openTab(event, 'Terms-and-Conditions')" class="tablinks">Terms and Conditions</a>
             -->
@@ -89,11 +90,15 @@
 
         <div id="Home" class="tabs">
             <p id="welcome-text-home">Hey, <b><?php echo  (isset($_SESSION["loggedIn"])) ?  $_SESSION["username"] : "Guest"; ?> </b></p>
-            <p class="tabs-headers">Good Morning</p>
+            <p class="tabs-headers"><?php echo greet() ?></p>
+            <hr>
+            <div>
+                
+            </div>
             <div id="storage-use-overview">
             </div>
-            <div style="width: 300px" id="reader"></div>
-            <?php displayLogs()?>
+            
+            
         </div>
 
         <div id="Upload" class="tabs">
@@ -128,7 +133,27 @@
             <?php
 
             if (isset($_SESSION["loggedIn"]) != true) {
-                $sql ;
+            ?>
+            <p><a href="/access.php">Login</a> to edit, generate QR Code and more!</p>
+            <?php
+            # broadcast files
+            $guest_id = $_COOKIE["guest_id"];
+            $sql = "SELECT * FROM files WHERE guest_id = '$guest_id'";
+            $result = mysqli_query($con, $sql);
+
+            while($row = mysqli_fetch_array($result)){?>
+            <div class="uploaded-files">
+                <i class="uploaded-file-icon fa-solid fa-file<?php echo getIconForUpload(pathinfo($row["file_name"], PATHINFO_EXTENSION))?>">
+                </i>
+                <p class="uploaded-file-name">
+                    <?php echo substr($row["file_name"], 15)?>
+                </p>
+                
+                <i class="fa-solid fa-copy uploaded-file-edit-icon" onclick='copyText("<?php echo $row["file_code"]?>")'></i>
+
+            </div>
+            <?php
+            }
             ?>
 
             <?php
@@ -201,6 +226,34 @@
             </div>
         </div>
         
+        <div id="TermsConditions" class="tabs">
+            <div id="tac-list">
+                <h4>1. Scope of Services</h4>
+                <p>Our file sharing system is a service designed to enable students and teachers within the school to share files with each other. The files that can be shared include any type of file, and there are no restrictions.</p>
+	
+                <h4>2. User Conduct</h4>
+                <p>Users of the file sharing system must conduct themselves in a manner that is consistent with the school's values and policies. Users must not engage in any activity that is illegal or that violates the rights of others.</p>
+                
+                <h4>3. Monitoring</h4>
+                <p>We will monitor the use of the file sharing system, including recording the upload times and frequency of file sharing by students and teachers. This monitoring is intended to ensure that the file sharing system is used in accordance with the terms and conditions and to identify any potential misuse.</p>
+                
+                <h4>4. No Fees</h4>
+                <p>Our file sharing system is provided to students and teachers at no cost.</p>
+                
+                <h4>5. Responsibility for Uploaded Files</h4>
+                <p>Users are solely responsible for the files they upload and share through the file sharing system. Our system is not responsible for the content of the files shared or for any consequences that may arise from the use of the files.</p>
+                
+                <h4>6. No Third-Party Sharing</h4>
+                <p>Files uploaded to the file sharing system will not be shared with any third-party websites or services.</p>
+                
+                <h4>7. User Privacy</h4>
+                <p>We will protect the personal information of our users by not collecting any information other than the fact that the user is a student or teacher and the files that they upload. Cookies may be used to identify the user's device.</p>
+                
+                <h4>8. Acceptance of Terms and Conditions</h4>
+                <p>By using our file sharing system, users agree to be bound by these terms and conditions. If a user does not agree to these terms and conditions, they must not use the file sharing system.</p>
+
+            </div>
+        </div>
         <?php
         }else{?>
         <div class="white-background">
@@ -228,6 +281,10 @@
         <?php
         }
         ?>
+        <div id="reader-wrapper">
+            <div style="width: 300px;"  id="reader"></div>
+        </div>
+        
         <script src="scripts/onclickevents.js"></script>
         <script src="scripts/download.js"></script>
         <script src="scripts/upload.js"></script>

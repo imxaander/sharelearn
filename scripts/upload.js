@@ -107,3 +107,4 @@ function getIconForUpload(fileformat){
             break;
     }
 }
+console.log(getRootUrl())

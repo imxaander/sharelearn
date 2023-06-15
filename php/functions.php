@@ -192,4 +192,19 @@ function getIconForUpload($fileformat){
     }
 }
 
+function greet(){
+    date_default_timezone_set('Asia/Manila'); // Replace 'Your_Timezone' with your desired timezone
+
+    $currentHour = date('H');
+
+    if ($currentHour >= 5 && $currentHour < 12) {
+        return "Good morning!";
+    } elseif ($currentHour >= 12 && $currentHour < 18) {
+        return "Good afternoon!";
+    } elseif ($currentHour >= 18 || $currentHour < 5) {
+        return "Good evening!";
+    } else {
+        return "Hello!";
+    }
+}
 ?>

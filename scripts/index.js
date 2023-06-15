@@ -35,9 +35,6 @@ function closeDim(){
     document.getElementById("dim-pane").style.display = "none"
 }
 
-function closeFromDim(){
-    closeSideBar();
-}
 
 function openTab(evt, tabName) {
     var i, x, tablinks;
@@ -52,6 +49,8 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " tab-selected";
     document.getElementById("tab-title").innerHTML = tabName;
+    closeDim()
+    closeSideBar()
 }
 
 function uploadLoading() {
@@ -66,6 +65,7 @@ function copyThisText(text) {
 
 
 function toast(message, position, gravity){
+
   Toastify({
 
     text: message,
@@ -80,6 +80,7 @@ function toast(message, position, gravity){
     style: {
       background: "#0B8043",
     },
+    maxToasts: 1
     }).showToast();
 }
 

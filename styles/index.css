@@ -21,7 +21,6 @@ body, html{
     z-index: 1;
 }
 #top-nav-bar{
-    color: white;
     height: 56px;
     font-size: 13pt;
     position: sticky;
@@ -31,6 +30,7 @@ body, html{
     top: 0px;
     backdrop-filter: blur(5px);
     box-shadow: 0px 6px 11px -2px rgb(40 167 69 / 40%);
+    background: white;
 }
 #top-nav-bar p{
     color: #095e32;
@@ -277,8 +277,10 @@ label svg{
 
 }
 #tac-list p{
-
     text-indent: 30px;
+}
+#tac-list h4{
+    color: #0B8043;
 }
 #About p{
     margin-top: 10px;
@@ -648,6 +650,7 @@ box-shadow: 4px 9px 123px -30px rgba(0,0,0,0.75);
     padding: 15px;
     font-size: 15px;
     text-align: center;
+    z-index: 10;
 }
 .uploaded-file-edit-close-button{
     font-size: 24px;
@@ -666,6 +669,52 @@ box-shadow: 4px 9px 123px -30px rgba(0,0,0,0.75);
     font-size: 15px;
 }
 #Files{
+    overflow: scroll;
+    height: calc(100vh - 150px);
+}
+#open-qr-reader{
+    border-radius: 5px;
+    border: black solid 1px;
+    padding: 5px;
+    font-size: 25px;
+    position: fixed;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#reader-wrapper{
+    position: fixed;
+    width: 300px;
+    position: fixed;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: none;
+    
+}
+#reader{
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+
+}
+#reader-wrapper button{
+    background-color: #0B8043;
+    border: none;
+    color: white;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 25px;
+}
+#reader-wrapper video{
+    border-radius: 10px;
+}
+#reader-wrapper select{
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+#TermsConditions{
     overflow: scroll;
     height: calc(100vh - 150px);
 }
