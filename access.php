@@ -65,11 +65,11 @@
                             <option <?php echo ($row["role"] == 'teacher') ? "selected" : ''; ?> value="teacher">Teacher</option>
                         </select>
                         <p class="control-labels">Grade and Section</p>
+                        
                         <select name="grade_section" id="" class="form-control">
-                            <option value="TVL - ALLEN">TVL - ALLEN</option>
-                            <option value="TVL - DELL">TVL - DELL</option>
+                            <option value="SECTION PH">PLACEHOLDER</option>
                         </select>
-
+                        <p align="center"><font size=1 >Sections will be added soon.</font></p>
                         <input type="text" name="device_id" value="<?php echo $row["device_id"]?>" hidden>
                         <br>
                         <button class="forms-next-button" type="submit">Sign up</button>

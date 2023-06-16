@@ -411,9 +411,6 @@ label svg{
     85%{
         transform: translate(-50%, -100%);
     }
-    95%{
-        transform: translate(-60%, -100%);
-    }
     100%{
         transform: translate(-50%, -100%);
     }
@@ -719,4 +716,24 @@ box-shadow: 4px 9px 123px -30px rgba(0,0,0,0.75);
 #TermsConditions{
     overflow: scroll;
     height: calc(100vh - 150px);
+}
+#Files button{
+    background-color: #0B8043;
+    border: none;
+    color: white;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 25px;
+}
+#Files input[type="text"]{
+    border: none;
+    border-bottom: #0B8043 solid 1px;
+
+}
+#Documentation{
+    overflow: scroll;
+    height: calc(100vh - 150px);
+}
+.icon-docs{
+    color: #0B8043 ;
 }

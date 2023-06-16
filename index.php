@@ -120,7 +120,7 @@
             </ul>
             <?php } ?>
             <hr>
-            <p>Need help? see <a href="/access.php">Documentation</a>.</p>
+            <p>Need help? see <a href="#" onclick="openTab(event, 'Documentation')" class="tablinks">Documentation</a>.</p>
         </div>
 
         <div id="Upload" class="tabs">
@@ -151,6 +151,8 @@
         </div>
 
         <div id="Files" class="tabs">
+                <p align="center"><font size=1 > Missing files? Refresh. </font></p>
+            
             <div id="file-list">
             <?php
 
@@ -199,9 +201,12 @@
                     </i>
                     <br>
                     <form action="php/editfile.php" method="post">
-                        <button type="submit" name="submit">Save</button>
-                        <p class="edit-file-name" name="name"><b>Name: </b><input type="text" value="<?php echo substr($row["file_name"], 15)?>"></p>
-                        <p class="edit-file-id" name="code"><b>ID:</b> <?php echo $row["file_code"]?> <i class="fa-solid fa-copy edit-file-id-copy-icon" onclick="copyText('<?php echo $row['file_code']?>')"></i> </p>
+                        <input type="text"  name ="oldname" value ="<?php echo $row["file_name"]?>" hidden>
+                        <input type="text" name="code" value="<?php echo $row["file_code"]?>" hidden>
+                        <font size=1 > Should be a valid file name </font>
+                        <p class="edit-file-name" ><b>Name: </b><input type="text" name="name" value="<?php echo substr($row["file_name"], 15)?>" pattern="^[a-zA-Z0-9_]+\.[a-zA-Z0-9]+$" required></p>
+                        <font size=1 > Share this code to let others download</font>
+                        <p class="edit-file-id" ><b>File Code:</b> <?php echo $row["file_code"]?> <i class="fa-solid fa-copy edit-file-id-copy-icon" onclick="copyText('<?php echo $row['file_code']?>')"></i> </p>
                         <p><b>Security :</b>  
                             <select id="edit-file-security" name="security">
                                 <option 
@@ -226,7 +231,7 @@
                                     }?>
                                 >Available</option>
                                 <option value="unavailable"
-                                    <?php if ($row["file_security"] == "unavailable") {
+                                    <?php if ($row["file_expiration"] == "unavailable") {
                                         echo "selected";
                                     }?>
                                 >Unavailable</option>
@@ -234,6 +239,8 @@
                         </p>
                         <p><b>Uploaded:</b> <?php echo $row["uploaded_date"]?></p>
                         <p><b>Size:</b> <?php echo format_speed($row["file_size"]) ?></p>
+                        <button type="submit" name="submit" value="save" ><i class="fa-solid fa-floppy-disk"></i></button> 
+                        <button type="submit" name="submit" value="delete" style="background: crimson"><i class="fa-solid fa-trash"></i></button> <br><br>
                         <a class="" href="../?search=<?php echo $row['file_code']?>"><b>Download</b></a>
                         <p style="margin:0">or</p>
                         <a class="" href="#" id="generate<?php echo $row['file_code']?>" onclick="createQR('<?php echo $row['file_code']?>')"><b>Show QR code</b></a>
@@ -286,6 +293,124 @@
                 <p>By using our file sharing system, users agree to be bound by these terms and conditions. If a user does not agree to these terms and conditions, they must not use the file sharing system.</p>
 
             </div>
+        </div>
+        
+        <div id="Documentation" class="tabs">
+            <ul   style="list-style-type: none;">
+                    <li id="file-upload-docs"><h5>Upload Files</h5></li>
+                    <ol>
+                        <li>Head over to the Upload (<i class="fa-solid fa-upload icon-docs" ></i>) tab by clicking/tappping the icon. </li>
+                        <li>Click the (<i class="fa-solid fa-plus icon-docs"></i>) icon inside the a rectangle to add a file. </li>
+                        <li>In this version, adding file is one at a time. Kindly select the file you want to add in the list. </li>
+                        <li>If you are done adding all the files you want to add, click/tap (<i class="fa-solid fa-share-from-square icon-docs"></i>) icon to upload the file/s.</li>
+                        <li>You will be prompted if the files have been successfully uploaded.</li>
+                        <ul>
+                            <li>Uploads only up to 5MB of data.</li>
+                            <li>If there are any errors, please file a <a href="#report-docs">Report</a>.</li>
+                            <li>Head over to <a href="#file-details-docs">Files</a> to see how can you share the files.</li>
+                        </ul>
+                    </ol>
+                    <br>
+
+                    <li id="file-download-docs"><h5>Download Files</h5></li>
+                    <ul>
+                        <h6 id="file-download-filecode-docs">Using File Code</h6>
+                        <ol>
+                            <li>Head over to the Download (<i class="fa-solid fa-upload icon-docs" ></i>) tab by clicking/tappping the icon. </li>
+                            <li>Select the "Enter File Code" text box to search for the file using the file code provided. see <a href="#file-details-docs">Files</a> to know about <b>File Code</b>.</li>
+                            <li>Paste/Type the file code of a file you want to download.</li>
+                            <li>After successfully typing the code, press (<i class="fa-solid fa-magnifying-glass icon-docs"></i>) to search for files associated with the code.</li>
+                            <li>If there is a file associated with the code, the box under the search button will show the file details and the "Download" button. </li>
+                            <ul>
+                                <li>If you are prompted  <font style="background: #0B8043; color: white;"> No file associated with the file code. </font>, the code is incorrect, or not existing in the database.</li>
+                            </ul>
+                            <li>Clicking/Tapping the "Download" button at the bottom of the page will directly download the file.</li>
+
+                            <ul>
+                                <li>Download speed may vary on your location inside the campus.</li>
+                                <li>If there are any errors, please file a <a href="#report-docs">Report</a>.</li>
+                            </ul>
+                        </ol>
+                        <br>
+                        
+                        <h6 id="file-download-qr-docs">Using QR Scanner</h6>
+                        <ol>
+                            <li>Click/Tap the Scan (<i class="fa-solid fa-qrcode icon-docs"></i>) icon under the bottom bar, at the center. </li>
+                            <li>Scan the file QR Code. see <a href="#file-details-docs">Files</a> to know about <b>File QR Code.</b></li>
+                            <li>If the QR Code is from sharelearn, it will be automatically redirect you to the download page and ready for download.</li>
+                            <li>Click/Tap the "Download" button at the bottom to download the file directly.</li>
+                            <ul>
+                                <li>If you are prompted  <font style="background: #0B8043; color: white;"> No file associated with the file code. </font>,please file a <a href="#report-docs">Report</a>.</li>
+                            </ul>
+                            <li>Clicking/Tapping the "Download" button at the bottom of the page will directly download the file.</li>
+
+                            <ul>
+                                <li>You can use any QR Code scanner but make sure you are connected to the campus' network.</li>
+                                <li>Download speed may vary on your location inside the campus.</li>
+                                <li>If there are any errors, please file a <a href="#report-docs">Report</a>.</li>
+                            </ul>
+                        </ol>
+                    </ul>
+
+                    <li id="files-docs"><h5>Files</h5></li>
+                    <ul>
+                        <h6 id="file-check-docs">Check your Files</h6>
+                        <ol>
+                            <li>Head over to the Files (<i class="fa-solid fa-file icon-docs" ></i>) tab by clicking/tappping the icon. </li>
+                            <li>This page will show you the list of all your files.</li>
+                            <ul>
+                                <li>If you are a guest, you can see your file name and can copy the code by clicking/tapping the (<i class="fa-solid fa-copy icon-docs"></i>) icon beside the file name.</li>
+                                <li>If you are a user (logged in), clicking (<i class="fa-solid fa-ellipsis-vertical icon-docs"></i>) icon will open up a window that offers to <b>Edit</b>, <b>Check</b>, and <b>Delete</b> the file details, <b>Generate the QR Code</b> for the file that can be used to <a href="#file-download-qr-docs"]>Download a file</a>.</li>
+                            </ul>
+                        </ol>
+                        <br>
+                        
+                        <h6 id="file-details-docs">Edit, Check, Delete, Generate QR Code, Download</h6>
+                        <?php if (isset($_SESSION["loggedIn"])) { ?>
+                            <div class="alert alert-success" role="alert">You have these features because you are registered. congrats!</div>
+                        <?php }else{ ?>
+                            <div class="alert alert-danger" role="alert" style="display:block !important">You dont have these features. <a href="/access.php" class="alert-link">Register</a> so you can use these features.</div>
+                        <?php } ?>
+                        <ul>
+                            <li id="file-details-edit-docs">Edit File Details</li>
+                            <ol>
+                                <li>Click/Tap the (<i class="fa-solid fa-ellipsis-vertical icon-docs"></i>) icon to access the edit window.</li>
+                                <li>Inside the window, you can change the following:</li>
+                                <ul>
+                                    <li>Name</li>
+                                    <li>Security</li>
+                                    <li>Availability</li>
+                                </ul>
+                                <li>Click (<i class="fa-solid fa-floppy-disk icon-docs"></i>) to save the file details.</li>
+                            </ol>
+
+                            <li id="file-details-delete-docs">Delete a file</li>
+                            <ol>
+                                <li>Click/Tap the (<i class="fa-solid fa-ellipsis-vertical icon-docs"></i>) icon to access the edit window.</li>
+                                <li>Inside the window click/tap the (<i class="fa-solid fa-trash icon-docs" style="color: red;"></i>) button. </li>
+                                <li>This will delete the file and cannot be recovered. </li>
+                            </ol>
+
+                            <li id="file-details-qr-docs">Copy File Code</li>
+                            <ol>
+                                <li>Click/Tap the (<i class="fa-solid fa-copy"></i>) icon to to copy the code to the clipboard.</li>
+                                <li>This code is used to download files. </li>
+                                <li>Go to <a href="#file-download-filecode-docs">Download via File Code</a> to download files with file codes.</li>
+                            </ol>
+
+                            <li id="file-details-qr-docs">Generate Qr Code</li>
+                            <ol>
+                                <li>Click/Tap the "Show QR Code" link to generate File QR Code.</li>
+                                <li>The link will change to a 300px square QR Code that leads to file download.</li>
+                                <li>Go to <a href="#file-download-qr-docs">Scan the QR Code</a> to see how to scan via sharelearn.</li>
+                            </ol>
+                        </ul>
+                    </ul>
+                    <br>
+                    <p id="report-docs" align="center">REPORT IS STILL IN DEVELOPMENT</p>
+                    
+                    
+            </ul>
         </div>
         <?php
         }else{?>

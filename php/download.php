@@ -14,9 +14,9 @@
             $row = mysqli_fetch_assoc($result);
 
             $today = date("Y-m-d H:i:s");
-            $expiration_date = strtotime($row["file_expiration"]);
+            $expiration_date = $row["file_expiration"];
 
-            if ($expiration_date < $today) {
+            if ($expiration_date == "available") {
 
                 $file = '../uploads/' . $row["file_name"];
 
@@ -49,7 +49,8 @@
                     echo "file not exists in the drive.";
                 }
             }else{
-                echo "file expired";
+                alert("danger", "File is not set to available.  If you are the owner. Edit the file and set the availability to available");
+                redirectToHome();
             }
         }else{
             echo "THERE IS NO result E ";
