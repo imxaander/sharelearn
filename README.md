@@ -42,7 +42,9 @@ We will protect the personal information of our users by not collecting any info
 #### 8\. Acceptance of Terms and Conditions
 
 By using our file sharing system, users agree to be bound by these terms and conditions. If a user does not agree to these terms and conditions, they must not use the file sharing system.
-------------------------------------------------------------------------------------------------------------
+
+## Using ShareLearn
+--
 
 * ##### Upload Files
     
